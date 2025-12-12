@@ -1,0 +1,78 @@
+<script>
+	import { MapPin, Moon } from '@lucide/svelte';
+	import HeaderSimple from '$lib/components/HeaderSimple.svelte';
+	import Footer from '$lib/components/Footer.svelte';
+</script>
+
+<HeaderSimple />
+
+<div class="min-h-[60vh] bg-white py-20">
+	<div class="container mx-auto px-6">
+		<div class="mb-16 text-center">
+			<h1 class="mb-4 font-serif text-4xl">Our Locations</h1>
+			<p class="mx-auto max-w-2xl text-gray-600">
+				Visit Restaurant İstanbul at our two prime locations in Maputo.
+			</p>
+			<div
+				class="mt-4 inline-flex items-center gap-2 rounded-full border border-green-100 bg-green-50 px-4 py-1 text-sm font-medium text-green-700"
+			>
+				<Moon size={14} />
+				<span>HALAL Certified</span>
+			</div>
+		</div>
+
+		<div class="mx-auto grid max-w-5xl gap-8 md:grid-cols-2">
+			<!-- Location 1 -->
+			<div class="group relative overflow-hidden rounded-xl border border-gray-200">
+				<div class="h-64 overflow-hidden">
+					<img
+						src="https://images.unsplash.com/photo-1567449303078-57ad995bd30f?auto=format&fit=crop&q=80&w=1000"
+						alt="Maputo Shopping Center"
+						class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+					/>
+				</div>
+				<div class="bg-white p-8">
+					<h3 class="mb-2 font-serif text-2xl">Maputo Shopping Center</h3>
+					<div class="mb-6 flex items-start gap-3 text-gray-600">
+						<MapPin class="mt-1 shrink-0 text-primary" size={18} />
+						<p>Rua Ngungunhane, 85<br />Loja G 25 R/C<br />Maputo</p>
+					</div>
+					<a
+						href="https://maps.google.com/?q=Maputo+Shopping+Center"
+						target="_blank"
+						class="inline-block w-full border border-gray-900 py-3 text-center text-xs font-bold uppercase tracking-widest text-gray-900 transition-colors hover:bg-gray-900 hover:text-white"
+					>
+						Get Directions
+					</a>
+				</div>
+			</div>
+
+			<!-- Location 2 -->
+			<div class="group relative overflow-hidden rounded-xl border border-gray-200">
+				<div class="h-64 overflow-hidden">
+					<img
+						src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&q=80&w=1000"
+						alt="Baía-Mall"
+						class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+					/>
+				</div>
+				<div class="bg-white p-8">
+					<h3 class="mb-2 font-serif text-2xl">Baía-Mall</h3>
+					<div class="mb-6 flex items-start gap-3 text-gray-600">
+						<MapPin class="mt-1 shrink-0 text-primary" size={18} />
+						<p>Baía Mall Shopping Center<br />Maputo<br />Mozambique</p>
+					</div>
+					<a
+						href="https://maps.google.com/?q=Baia+Mall+Maputo"
+						target="_blank"
+						class="inline-block w-full border border-gray-900 py-3 text-center text-xs font-bold uppercase tracking-widest text-gray-900 transition-colors hover:bg-gray-900 hover:text-white"
+					>
+						Get Directions
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<Footer />

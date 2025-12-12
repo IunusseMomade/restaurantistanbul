@@ -38,8 +38,8 @@
 	>
 		<div class="md:w-1/3">
 			<div class="mb-4 flex items-center gap-4">
-				<div class="h-[1px] w-12 bg-[#C5A059]"></div>
-				<span class="text-xs font-bold uppercase tracking-widest text-gray-400">On The Menu</span>
+				<div class="h-[1px] w-12 bg-primary"></div>
+				<span class="text-overline text-gray-400">On The Menu</span>
 			</div>
 			<h3 class="font-serif text-4xl leading-tight text-gray-900">
 				SIGNATURE <br /> DISHES
@@ -70,12 +70,12 @@
 						<div
 							class="absolute top-4 right-4 rounded-full bg-white/90 p-2 opacity-0 transition-opacity group-hover:opacity-100"
 						>
-							<ChevronRight size={16} class="text-[#C5A059]" />
+							<ChevronRight size={16} class="text-primary" />
 						</div>
 					</div>
 					<div class="p-6">
 						<h4
-							class="font-serif mb-2 text-lg text-gray-900 transition-colors group-hover:text-[#C5A059]"
+							class="font-serif mb-2 text-lg text-gray-900 transition-colors group-hover:text-primary"
 						>
 							{item.name}
 						</h4>
@@ -84,19 +84,19 @@
 						<div
 							class="mb-6 grid grid-cols-2 gap-y-2 text-[10px] font-bold uppercase tracking-wider text-gray-400"
 						>
-							<div class="flex items-center gap-1">
-								<Utensils size={10} class="text-[#C5A059]" />
+							<div class="flex items-center gap-1 text-secondary">
+								<Utensils size={10} class="text-primary" />
 								{item.category}
 							</div>
 							<div class="flex items-center gap-1">
-								<Tag size={10} class="text-[#C5A059]" />
+								<Tag size={10} class="text-accent" />
 								{item.price}
 							</div>
 						</div>
 
 						<div class="flex items-center justify-between border-t border-gray-100 pt-4">
 							<button
-								class="bg-[#C5A059] px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-white hover:bg-[#967941]"
+								class="btn-primary text-[10px]"
 							>
 								Order Now
 							</button>
@@ -123,7 +123,7 @@
 					</div>
 					<div class="p-6">
 						<h4
-							class="font-serif mb-2 text-lg text-gray-900 transition-colors group-hover:text-[#C5A059]"
+							class="font-serif mb-2 text-lg text-gray-900 transition-colors group-hover:text-primary"
 						>
 							{item.name}
 						</h4>
@@ -131,18 +131,18 @@
 						<div
 							class="mb-6 grid grid-cols-2 gap-y-2 text-[10px] font-bold uppercase tracking-wider text-gray-400"
 						>
-							<div class="flex items-center gap-1">
-								<Utensils size={10} class="text-[#C5A059]" />
+							<div class="flex items-center gap-1 text-secondary">
+								<Utensils size={10} class="text-primary" />
 								{item.category}
 							</div>
 							<div class="flex items-center gap-1">
-								<Tag size={10} class="text-[#C5A059]" />
+								<Tag size={10} class="text-accent" />
 								{item.price}
 							</div>
 						</div>
 						<div class="flex items-center justify-between border-t border-gray-100 pt-4">
 							<button
-								class="bg-[#C5A059] px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-white hover:bg-[#967941]"
+								class="btn-primary text-[10px]"
 								>Order Now</button
 							>
 							<span

@@ -18,15 +18,15 @@
 
 		<!-- Desktop Nav Actions -->
 		<div class="hidden items-center gap-8 text-sm font-medium tracking-wide md:flex">
-			<a href="/locations" class="transition-colors hover:text-[#C5A059]">LOCATIONS</a>
-			<a href="/menu" class="transition-colors hover:text-[#C5A059]">MENU</a>
-			<a href="/about" class="transition-colors hover:text-[#C5A059]">OUR STORY</a>
-			<a href="/contact" class="transition-colors hover:text-[#C5A059]">CONTACT</a>
+			<a href="/locations" class="link-hover">LOCATIONS</a>
+			<a href="/menu" class="link-hover">MENU</a>
+			<a href="/about" class="link-hover">OUR STORY</a>
+			<a href="/contact" class="link-hover">CONTACT</a>
 
 			<div class="ml-4 flex items-center gap-4">
-				<a href="/login" class="border-b border-gray-800 pb-0.5 text-xs uppercase">Account</a>
+				<a href="/login" class="border-b border-secondary pb-0.5 text-xs uppercase text-secondary hover:text-primary hover:border-primary transition-colors">Account</a>
 				<button
-					class="bg-[#C5A059] px-6 py-2.5 text-xs font-bold uppercase tracking-widest text-white shadow-sm transition-colors hover:bg-[#a68545]"
+					class="btn-primary px-6 py-2.5 text-xs shadow-sm"
 				>
 					Order Online
 				</button>
@@ -43,6 +43,27 @@
 		</button>
 	</div>
 
+	<!-- Mobile Menu -->
+	{#if isMenuOpen}
+		<div class="border-t border-gray-100 bg-white px-6 py-6 md:hidden">
+			<nav class="flex flex-col gap-6 text-sm font-medium tracking-wide">
+				<a href="/locations" class="link-hover" onclick={() => (isMenuOpen = false)}>LOCATIONS</a>
+				<a href="/menu" class="link-hover" onclick={() => (isMenuOpen = false)}>MENU</a>
+				<a href="/about" class="link-hover" onclick={() => (isMenuOpen = false)}>OUR STORY</a>
+				<a href="/contact" class="link-hover" onclick={() => (isMenuOpen = false)}>CONTACT</a>
+				<div class="h-[1px] w-full bg-gray-100"></div>
+				<div class="flex flex-col gap-4">
+					<a
+						href="/login"
+						class="w-fit border-b border-secondary pb-0.5 text-xs uppercase text-secondary transition-colors hover:border-primary hover:text-primary"
+						onclick={() => (isMenuOpen = false)}>Account</a
+					>
+					<button class="btn-primary w-full text-center shadow-sm"> Order Online </button>
+				</div>
+			</nav>
+		</div>
+	{/if}
+
 	<!-- Hero Section -->
 	<div class="relative h-[500px] w-full">
 		<div class="absolute inset-0">
@@ -55,7 +76,7 @@
 		</div>
 		<div class="relative container mx-auto flex h-full items-center px-6">
 			<div class="max-w-xl text-white">
-				<h5 class="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-[#C5A059]">
+				<h5 class="mb-4 text-overline text-primary">
 					Welcome to Shamiana
 				</h5>
 				<h1 class="font-serif mb-6 text-5xl leading-tight md:text-6xl">
@@ -66,7 +87,7 @@
 					two iconic locations.
 				</p>
 				<button
-					class="border border-[#C5A059] bg-transparent px-8 py-3 text-xs font-bold uppercase tracking-widest text-white transition-all hover:bg-[#C5A059] hover:text-white"
+					class="border border-primary bg-transparent px-8 py-3 text-overline text-white transition-all hover:bg-primary hover:text-white"
 				>
 					View Menu
 				</button>
@@ -78,8 +99,8 @@
 	<div class="hidden w-full border-t border-b border-gray-100 bg-[#FAFAFA] py-3 md:block">
 		<div class="container mx-auto flex items-center justify-between px-6">
 			<h2 class="font-serif text-xl tracking-wide text-gray-800">EXPLORE</h2>
-			<div class="flex gap-8 text-xs font-bold uppercase tracking-widest text-gray-500">
-				<a href="#overview" class="-mb-3.5 border-b-2 border-[#C5A059] pb-3 text-[#C5A059]"
+			<div class="flex gap-8 text-overline text-gray-500">
+				<a href="#overview" class="-mb-3.5 border-b-2 border-primary pb-3 text-primary"
 					>Overview</a
 				>
 				<a href="#signature-dishes" class="transition-colors hover:text-gray-900">Dishes</a>

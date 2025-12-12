@@ -8,7 +8,7 @@
 	import RelatedVenues from '$lib/components/RelatedVenues.svelte';
 
 
-    import Design_1 from '$lib/Design-1.svelte';
+    // import Design_1 from '$lib/Design-1.svelte';
 </script>
 
 

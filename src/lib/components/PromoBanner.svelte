@@ -12,14 +12,14 @@
 
 	<!-- Floating Content Card -->
 	<div class="relative z-10 container mx-auto flex justify-end px-6">
-		<div class="relative max-w-md overflow-hidden bg-white p-10 shadow-2xl md:p-12">
+		<div class="relative max-w-md overflow-hidden bg-white p-10 border border-gray-200 md:p-12">
 			<!-- Decorative Background blob -->
 			<div
-				class="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-pink-100 opacity-50 blur-3xl"
+				class="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-accent/10 opacity-50 blur-3xl"
 			></div>
 
 			<h3
-				class="font-serif mb-4 text-2xl font-bold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500"
+				class="font-serif mb-4 text-2xl font-bold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-secondary to-brand-cyan"
 			>
 				MEMBERSHIP
 			</h3>
@@ -29,7 +29,7 @@
 			</p>
 			<a
 				href="#learn-more"
-				class="inline-block border-b border-gray-800 pb-1 text-xs font-bold uppercase tracking-widest text-gray-800 transition-colors hover:border-[#C5A059] hover:text-[#C5A059]"
+				class="inline-block border-b border-gray-800 pb-1 text-overline text-gray-800 transition-colors hover:border-primary hover:text-primary"
 			>
 				Join Now
 			</a>

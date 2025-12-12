@@ -1,1 +1,38 @@
 @import 'tailwindcss';
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap");
+
+@theme {
+  /* Brand Colors */
+  --color-gold: #C5A059;
+  --color-gold-dark: #a68545;
+  --color-brand-red: #d31318;
+  --color-brand-cyan: #01bded;
+  --color-brand-navy: #33357e;
+
+  /* Semantic Mapping */
+  --color-primary: var(--color-gold);
+  --color-primary-hover: var(--color-gold-dark);
+  --color-secondary: var(--color-brand-navy);
+  --color-accent: var(--color-brand-red);
+
+  /* Typography */
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Inter", sans-serif;
+}
+
+@layer utilities {
+  /* Repeated Typography Pattern */
+  .text-overline {
+    @apply text-xs font-bold uppercase tracking-widest;
+  }
+
+  /* Repeated Button Pattern */
+  .btn-primary {
+    @apply bg-primary px-4 py-2 text-xs font-bold uppercase tracking-widest text-white transition-colors hover:bg-primary-hover;
+  }
+  
+  /* Link Hover Effect */
+  .link-hover {
+    @apply transition-colors hover:text-primary;
+  }
+}
