@@ -1,13 +1,13 @@
 <script>
 	import { MapPin, Moon } from '@lucide/svelte';
-	import HeaderSimple from '$lib/components/HeaderSimple.svelte';
-	import Footer from '$lib/components/Footer.svelte';
+	// import HeaderSimple from '$lib/components/HeaderSimple.svelte';
+	// import Footer from '$lib/components/Footer.svelte';
 	import location_msc from '$lib/assets/images/location-msc.jpeg?enhanced';
 	import location_bm from '$lib/assets/images/section1-1.jpeg?enhanced';
 	import * as m from '$lib/paraglide/messages';
 </script>
 
-<HeaderSimple forceSolid />
+<!-- <HeaderSimple forceSolid /> -->
 
 <div class="min-h-[60vh] bg-white py-20">
 	<div class="container mx-auto px-6">
@@ -80,4 +80,4 @@
 	</div>
 </div>
 
-<Footer />
+<!-- <Footer /> -->

@@ -1,5 +1,5 @@
 <script>
-	import HeaderSimple from '$lib/components/HeaderSimple.svelte';
+	// import HeaderSimple from '$lib/components/HeaderSimple.svelte';
 	import ImageViewer from '$lib/components/ImageViewer.svelte';
 	import * as m from '$lib/paraglide/messages';
 	import { onMount } from 'svelte';
@@ -26,8 +26,12 @@
 	let isUserClicking = $state(false); // Prevent observer from overriding manual clicks
 	/** @type {HTMLDivElement | null} */
 	let categoryNavScroller = null;
+	
+	// Ref for the OrderBag component
+	let orderBagRef = $state();
 
-	import Footer from "$lib/components/Footer.svelte";
+	// import Footer from "$lib/components/Footer.svelte";
+	import OrderBag from "$lib/components/OrderBag.svelte"
 
 	/** @param {WheelEvent} e */
 	function onCategoryNavWheel(e) {
@@ -56,6 +60,17 @@
 		viewerImages = itemImages;
 		viewerStartIndex = 0;
 	}
+	
+	function handleAddItem(item) {
+		if (orderBagRef) {
+			orderBagRef.addToCart({
+				name: item.name,
+				price: item.price,
+				image: item.image, // pass single image for thumbnail
+				description: item.desc
+			});
+		}
+	}
 
 	// --- Menu Data Structure ---
 	let menuCategories = $derived([
@@ -79,8 +94,11 @@
 		{ id: 'kids', label: m.cat_kids() },
 		{ id: 'drinks', label: m.cat_drinks() }
 	]);
+	//shopping ba
 
 	//menu imports
+	
+	import ir_orderbag from '$lib/assets/ir-shopping-bag.png?enhanced';
 	import baklava from '$lib/assets/images/menu/baklava-1.jpeg?enhanced';
 
 	//Covers change this to enhance, gallery images to enhanced imports and in img
@@ -457,14 +475,15 @@
 	});
 </script>
 
+
 <svelte:head>
-	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+	<!-- <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"> -->
 </svelte:head>
 
 <div class="min-h-screen bg-white text-gray-800 font-sans selection:bg-[#C5A059] selection:text-white">
 	
 	<!-- --- 1. HEADER (Consistent) --- -->
-	 <HeaderSimple/>
+	 <!-- <HeaderSimple/> -->
 
 	<!-- --- 2. HERO SECTION --- -->
 	<section class="relative w-full h-[60vh] flex items-center justify-center overflow-hidden pt-24 md:pt-0">
@@ -510,6 +529,12 @@
 
 	<!-- --- 3. MENU CONTENT --- -->
 	<div class="container mx-auto px-6 py-20 max-w-5xl">
+
+		<OrderBag
+		  bind:this={orderBagRef}
+		  phone="258847131300"
+		  bagImage={ir_orderbag}
+		 />
 		
 		{#each menuCategories as category}
 			{#if menuItems[category.id] && menuItems[category.id].length > 0}
@@ -532,14 +557,18 @@
 										{#if item.image}
 											<button 
 												type="button"
-												onclick={() => openMenuImageViewer(category.id, item)} 
+												onclick={(e) => { e.stopPropagation(); openMenuImageViewer(category.id, item); }} 
 												class="shrink-0 bg-transparent border-none p-0 cursor-pointer" 
 												aria-label="View full image"
 											>
 												<enhanced:img src={item.image} alt={item.name} class="w-20 h-20 object-cover rounded-sm shadow-lg border border-gray-700 hover:opacity-80 transition-opacity" />
 											</button>
 										{/if}
-										<div class="flex-1">
+										<!-- Made the text area clickable for adding to cart -->
+										<button 
+											class="flex-1 text-left w-full hover:bg-white/5 p-2 -m-2 rounded transition-colors"
+											onclick={() => handleAddItem(item)}
+										>
 											<div class="flex justify-between items-baseline mb-2 border-b border-gray-700 pb-2">
 												<h3 class="font-serif text-xl font-medium text-[#C5A059] group-hover:text-white transition-colors">
 													{item.name}
@@ -547,7 +576,7 @@
 												<span class="font-serif text-xl font-light">{item.price}</span>
 											</div>
 											<p class="text-gray-400 text-sm font-light leading-relaxed">{item.desc}</p>
-										</div>
+										</button>
 									</div>
 								{/each}
 							</div>
@@ -572,14 +601,18 @@
 									{#if item.image}
 										<button 
 											type="button"
-												onclick={() => openMenuImageViewer(category.id, item)} 
+												onclick={(e) => { e.stopPropagation(); openMenuImageViewer(category.id, item); }} 
 											class="shrink-0 bg-transparent border-none p-0 cursor-pointer" 
 											aria-label="View full image"
 										>
 											<enhanced:img src={item.image} alt={item.name} class="w-20 h-20 object-cover rounded-sm shadow-md hover:opacity-80 transition-opacity" />
 										</button>
 									{/if}
-									<div class="flex-1">
+									<!-- Made the text area clickable for adding to cart -->
+									<button 
+										class="flex-1 text-left w-full hover:bg-gray-50 p-2 -m-2 rounded transition-colors"
+										onclick={() => handleAddItem(item)}
+									>
 										<div class="flex justify-between items-baseline mb-2 border-b border-dotted border-gray-300 pb-1">
 											<h3 class="font-serif text-lg text-gray-800 font-medium group-hover:text-[#C5A059] transition-colors">
 												{item.name}
@@ -590,7 +623,7 @@
 										{#if item.dietary}
 											<span class="text-[10px] text-gray-400 uppercase tracking-wider mt-1 block">{item.dietary === 'V' ? m.dietary_veg() : item.dietary}</span>
 										{/if}
-									</div>
+									</button>
 								</div>
 							{/each}
 						</div>
@@ -616,7 +649,7 @@
 		{/each}
 
 	</div>
-	<Footer/>
+	<!-- <Footer/> -->
 
 	<!-- --- FOOTER (Same as Layout) --- -->
 	 

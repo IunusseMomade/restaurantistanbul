@@ -1,7 +1,9 @@
 <script>
 	import Footer from '$lib/components/Footer.svelte';
+	// import Footer from '$lib/components/Footer.svelte';
+
 	import Gallery from '$lib/components/Gallery.svelte';
-	import Header from '$lib/components/Header.svelte';
+	import HomeHero from '$lib/components/HomeHero.svelte';
 	import Hero from '$lib/components/Hero.svelte';
 	import PromoBanner from '$lib/components/PromoBanner.svelte';
 	import RelatedVenues from '$lib/components/RelatedVenues.svelte';
@@ -14,7 +16,7 @@
 	const seoTitle = m.home_seo_title();
 	const seoDescription = m.home_seo_description();
 
-	const canonical = $derived(() => `${$page.url.origin}${$page.url.pathname}`.replace(/\/$/, ''));
+	const canonical = $derived(() => `${page.url.origin}${page.url.pathname}`.replace(/\/$/, ''));
 
 	const jsonLd = $derived(() =>
 		JSON.stringify(
@@ -22,12 +24,12 @@
 				'@context': 'https://schema.org',
 				'@type': 'Restaurant',
 				name: 'Istanbul Restaurant',
-				url: `${$page.url.origin}${$page.url.pathname}`.replace(/\/$/, ''),
+				url: `${page.url.origin}${page.url.pathname}`.replace(/\/$/, ''),
 				areaServed: { '@type': 'City', name: 'Maputo' },
 				address: { '@type': 'PostalAddress', addressLocality: 'Maputo', addressCountry: 'MZ' },
 				servesCuisine: ['Turkish', 'Mediterranean'],
 				priceRange: '$$',
-				hasMenu: `${$page.url.origin}${localizeHref('/menu')}`,
+				hasMenu: `${page.url.origin}${localizeHref('/menu')}`,
 				openingHoursSpecification: [
 					{
 						'@type': 'OpeningHoursSpecification',
@@ -72,7 +74,7 @@
 		)
 	);
 
-	const ogImage = $derived(() => new URL(ogImageAssetUrl, $page.url.origin).toString());
+	const ogImage = $derived(() => new URL(ogImageAssetUrl, page.url.origin).toString());
 </script>
 
 <svelte:head>
@@ -99,8 +101,8 @@
 </svelte:head>
 
 <!-- <Design_1/> -->
- 
-<Header/>
+
+<HomeHero/>
 <Hero/>
 
 
@@ -109,4 +111,4 @@
 <RelatedVenues/>
 <PromoBanner/>
 
-<Footer/>
+<!-- <Footer/> -->

@@ -17,6 +17,15 @@
 	import schnitzel from '$lib/assets/images/menu/schnitzel.jpeg?enhanced';
 
 	const priceMZN = (n) => () => `${n} MZN`;
+	
+	function openWhatsApp(event, item) {
+		event.preventDefault();
+		event.stopPropagation();
+		// Using function calls for name/price as per item structure
+		const message = `Olá! Gostaria de encomendar: ${item.name()} (${item.price()})`;
+		const url = `https://wa.me/258847131300?text=${encodeURIComponent(message)}`;
+		window.open(url, '_blank');
+	}
 
 	const featured = [
 		{
@@ -161,7 +170,14 @@
 						</div>
 
 						<div class="flex items-center justify-between border-t border-gray-100 pt-4">
-							<span class="btn-primary text-[10px]">{m.home_specials_btn_order()}</span>
+							<!-- Changed span to button with WhatsApp logic -->
+							<button 
+								type="button"
+								class="btn-primary text-[10px] hover:scale-105 transition-transform z-10 relative"
+								onclick={(e) => openWhatsApp(e, item)}
+							>
+								{m.home_specials_btn_order()}
+							</button>
 							<span class="text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-gray-900">
 								{m.home_specials_btn_details()}
 							</span>
@@ -172,3 +188,13 @@
 		</div>
 	</div>
 </section>
+
+<style>
+	.scrollbar-hide::-webkit-scrollbar {
+		display: none;
+	}
+	.scrollbar-hide {
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+	}
+</style>

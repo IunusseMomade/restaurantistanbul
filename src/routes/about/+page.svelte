@@ -8,8 +8,8 @@
   import food_1 from '$lib/assets/images/about/about-section2-2.jpeg?enhanced';
   import about_header from '$lib/assets/images/about-header.jpeg?enhanced';
 
-  import HeaderSimple from '$lib/components/HeaderSimple.svelte';
-  import Footer from '$lib/components/Footer.svelte';
+  // import HeaderSimple from '$lib/components/HeaderSimple.svelte';
+  // import Footer from '$lib/components/Footer.svelte';
 
   import * as m from '$lib/paraglide/messages';
   import { page } from '$app/state';
@@ -17,7 +17,7 @@
 
   const seoTitle = m.about_seo_title();
   const seoDescription = m.about_seo_description();
-  const canonical = $derived(() => `${$page.url.origin}${$page.url.pathname}`.replace(/\/$/, ''));
+  const canonical = $derived(() => `${page.url.origin}${page.url.pathname}`.replace(/\/$/, ''));
 </script>
 
 <svelte:head>
@@ -39,7 +39,7 @@
 </svelte:head>
 
 <div class="min-h-screen bg-white text-gray-800 font-sans selection:bg-[#C5A059] selection:text-white">
-	<HeaderSimple />
+	<!-- <HeaderSimple /> -->
 
 	<!-- --- 2. HERO SECTION --- -->
 	<section class="relative w-full h-[70vh] flex items-center justify-center overflow-hidden">
@@ -238,7 +238,7 @@
 		</div>
 	</section>
 
-	<Footer />
+	<!-- <Footer /> -->
 </div>
 
 <style>

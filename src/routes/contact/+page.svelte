@@ -1,11 +1,11 @@
 <script>
 	import { Phone, Mail, Facebook, Instagram, Video, MapPin, Send } from '@lucide/svelte';
-	import HeaderSimple from '$lib/components/HeaderSimple.svelte';
-	import Footer from '$lib/components/Footer.svelte';
+	// import HeaderSimple from '$lib/components/HeaderSimple.svelte';
+	// import Footer from '$lib/components/Footer.svelte';
 	import * as m from '$lib/paraglide/messages';
 </script>
 
-<HeaderSimple forceSolid />
+<!-- <HeaderSimple forceSolid /> -->
 
 <div class="min-h-[60vh] bg-gray-50 py-20">
 	<div class="container mx-auto px-6">
@@ -183,4 +183,4 @@
 	</div>
 </div>
 
-<Footer />
+<!-- <Footer /> -->
