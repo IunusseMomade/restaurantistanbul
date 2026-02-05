@@ -670,5 +670,20 @@
 	"info_convenience_value": "Takeaway",
 	"info_convenience_sub": "Easy access in shopping centers",
 	"info_cta_menu": "View Menu",
-	"footer_locations_line": "Maputo Shopping Center • Baía-Mall"
+	"footer_locations_line": "Maputo Shopping Center • Baía-Mall",
+	"bag_open_label": "Open Cart",
+	"bag_start_order": "Start Order",
+	"bag_tap_to_add": "Tap dish name to add",
+	"bag_finish_order": "Finish Order",
+	"bag_tap_to_send": "Tap bag to send order",
+	"bag_my_order": "MY ORDER",
+	"bag_items": "items",
+	"bag_empty_title": "Your cart is empty.",
+	"bag_empty_desc": "Tap dish name to add to order.",
+	"bag_remove": "REMOVE",
+	"bag_estimated_total": "Estimated Total",
+	"bag_order_whatsapp": "Order Now via WhatsApp",
+	"bag_wa_greeting": "Hello! I would like to place the following order:",
+	"bag_wa_total": "Total"
+
 }

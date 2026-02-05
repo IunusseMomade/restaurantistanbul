@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { fly, fade, scale } from 'svelte/transition';
+  import * as m from '$lib/paraglide/messages';
 
   // Props: phone number (WhatsApp) and enhanced image source for the bag
   let { phone = '258847131300', bagImage } = $props();
@@ -68,7 +69,7 @@
   function proceedToOrder() {
     const itemsList = cart.map(i => `- ${i.quantity}x ${i.name} (${i.price})`).join('\n');
     const total = getCartTotal();
-    const message = `Olá! Gostaria de fazer o seguinte pedido:\n\n${itemsList}\n\n*Total: ${total}MT*`;
+    const message = `${m.bag_wa_greeting()}\n\n${itemsList}\n\n*${m.bag_wa_total()}: ${total}MT*`;
     const waLink = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
     isCartOpen = false;
@@ -104,7 +105,7 @@
 <div class="order-bag"> 
   <!-- FAB -->
   <div class="fixed left-6 top-[55%] md:top-[40%] z-40 flex items-center gap-4" transition:scale={{ duration: 200, start: 0.8 }}>
-    <button on:click={() => (isCartOpen = true)} aria-label="Abrir cesto" class="relative transition-transform active:scale-95 hover:scale-105">
+    <button on:click={() => (isCartOpen = true)} aria-label={m.bag_open_label()} class="relative transition-transform active:scale-95 hover:scale-105">
       {#if bagImage}
         <enhanced:img src={bagImage} alt="Cesto" class="sm:w-24 sm:h-24 w-18 h-18  object-contain drop-shadow-lg" />
       {:else}
@@ -126,8 +127,8 @@
         <div class="flex items-center gap-3">
           <div class="bg-black/10 p-1.5 rounded-full">🧾</div>
           <div>
-            <p class="text-xs font-black uppercase tracking-wide mb-0.5">Comece o pedido</p>
-            <p class="text-[10px] font-bold opacity-80">Toque no nome do prato para adicionar</p>
+            <p class="text-xs font-black uppercase tracking-wide mb-0.5">{m.bag_start_order()}</p>
+            <p class="text-[10px] font-bold opacity-80">{m.bag_tap_to_add()}</p>
           </div>
         </div>
       </div>
@@ -139,8 +140,8 @@
         <div class="flex items-center gap-3">
           <div class="bg-black/10 p-1.5 rounded-full">📣</div>
           <div>
-            <p class="text-xs font-black uppercase tracking-wide mb-0.5">Finalizar Pedido</p>
-            <p class="text-[10px] font-bold opacity-80">Toque no cesto para enviar o seu pedido</p>
+            <p class="text-xs font-black uppercase tracking-wide mb-0.5">{m.bag_finish_order()}</p>
+            <p class="text-[10px] font-bold opacity-80">{m.bag_tap_to_send()}</p>
           </div>
         </div>
       </div>
@@ -154,7 +155,7 @@
 
       <div class="relative z-10 bg-white w-full sm:w-[400px] h-[85vh] sm:h-screen rounded-t-3xl sm:rounded-none sm:rounded-l-3xl shadow-2xl flex flex-col" transition:fly={{ y: 100, duration: 300 }} role="dialog" aria-modal="true">
         <div class="p-5 border-b border-gray-100 flex items-center justify-between">
-          <h2 class="text-xl font-black">MEU PEDIDO <span class="text-sm font-normal text-gray-500">({getCartCount()} itens)</span></h2>
+          <h2 class="text-xl font-black">{m.bag_my_order()} <span class="text-sm font-normal text-gray-500">({getCartCount()} {m.bag_items()})</span></h2>
           <button class="p-2 text-gray-400 hover:text-[#ee1b21] rounded-full" on:click={() => (isCartOpen = false)}>✕</button>
         </div>
 
@@ -162,8 +163,8 @@
           {#if cart.length === 0}
             <div class="h-full flex flex-col items-center justify-center text-center text-gray-400 space-y-4">
               <div class="bg-gray-50 p-6 rounded-full">🧺</div>
-              <p class="text-sm font-medium text-[#1d140e]">O seu cesto está vazio.</p>
-              <p class="text-xs text-gray-500 max-w-[200px]">Toque no nome do prato para adicionar ao pedido.</p>
+              <p class="text-sm font-medium text-[#1d140e]">{m.bag_empty_title()}</p>
+              <p class="text-xs text-gray-500 max-w-[200px]">{m.bag_empty_desc()}</p>
             </div>
           {:else}
             {#each cart as item, i}
@@ -183,7 +184,7 @@
                       <span class="w-6 text-center text-xs font-bold text-[#1d140e]">{item.quantity}</span>
                       <button on:click={() => updateQuantity(i, 1)} class="w-8 h-full flex items-center justify-center text-gray-500">+</button>
                     </div>
-                    <button on:click={() => removeFromCart(i)} class="text-[10px] text-gray-400 font-bold hover:text-red-500 underline">REMOVER</button>
+                    <button on:click={() => removeFromCart(i)} class="text-[10px] text-gray-400 font-bold hover:text-red-500 underline">{m.bag_remove()}</button>
                   </div>
                 </div>
               </div>
@@ -193,11 +194,11 @@
 
         <div class="p-6 bg-white border-t border-gray-100 pb-8 sm:pb-6">
           <div class="flex justify-between items-center mb-4">
-            <span class="text-sm font-medium text-gray-500">Total Estimado</span>
+            <span class="text-sm font-medium text-gray-500">{m.bag_estimated_total()}</span>
             <span class="text-xl font-black text-[#1d140e]">{getCartTotal()} MT</span>
           </div>
           <button on:click={proceedToOrder} disabled={cart.length === 0} class="w-full bg-[#1d140e] text-white font-black py-4 rounded-xl disabled:opacity-50 disabled:pointer-events-none">
-            Pedir Agora via WhatsApp
+            {m.bag_order_whatsapp()}
           </button>
         </div>
       </div>

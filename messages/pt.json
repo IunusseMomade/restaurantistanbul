@@ -697,5 +697,20 @@
 	"info_convenience_value": "Takeaway",
 	"info_convenience_sub": "Fácil acesso em centros comerciais",
 	"info_cta_menu": "Ver Menu",
-	"footer_locations_line": "Maputo Shopping Center • Baía-Mall"
+	"footer_locations_line": "Maputo Shopping Center • Baía-Mall",
+	"bag_open_label": "Abrir Cesto",
+	"bag_start_order": "Comece o Pedido",
+	"bag_tap_to_add": "Toque no nome do prato para adicionar",
+	"bag_finish_order": "Finalizar Pedido",
+	"bag_tap_to_send": "Toque no cesto para enviar o seu pedido",
+	"bag_my_order": "MEU PEDIDO",
+	"bag_items": "itens",
+	"bag_empty_title": "O seu cesto está vazio.",
+	"bag_empty_desc": "Toque no nome do prato para adicionar ao pedido.",
+	"bag_remove": "REMOVER",
+	"bag_estimated_total": "Total Estimado",
+	"bag_order_whatsapp": "Pedir Agora via WhatsApp",
+	"bag_wa_greeting": "Olá! Gostaria de fazer o seguinte pedido:",
+	"bag_wa_total": "Total"
+
 }

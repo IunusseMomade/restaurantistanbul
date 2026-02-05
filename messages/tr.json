@@ -673,5 +673,20 @@
 	"info_convenience_value": "Paket servis",
 	"info_convenience_sub": "AVM’lerde kolay erişim",
 	"info_cta_menu": "Menüyü Gör",
-	"footer_locations_line": "Maputo Shopping Center • Baía-Mall"
+	"footer_locations_line": "Maputo Shopping Center • Baía-Mall",
+	"bag_open_label": "Sepeti Aç",
+	"bag_start_order": "Siparişe Başla",
+	"bag_tap_to_add": "Eklemek için yemek adına dokunun",
+	"bag_finish_order": "Siparişi Tamamla",
+	"bag_tap_to_send": "Siparişi göndermek için sepete dokunun",
+	"bag_my_order": "SİPARİŞİM",
+	"bag_items": "ürün",
+	"bag_empty_title": "Sepetiniz boş.",
+	"bag_empty_desc": "Siparişe eklemek için yemek adına dokunun.",
+	"bag_remove": "KALDIR",
+	"bag_estimated_total": "Tahmini Toplam",
+	"bag_order_whatsapp": "WhatsApp ile Sipariş Ver",
+	"bag_wa_greeting": "Merhaba! Aşağıdaki siparişi vermek istiyorum:",
+	"bag_wa_total": "Toplam"
+
 }
