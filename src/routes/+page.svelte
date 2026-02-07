@@ -18,61 +18,60 @@
 
 	const canonical = $derived(() => `${page.url.origin}${page.url.pathname}`.replace(/\/$/, ''));
 
-	const jsonLd = $derived(() =>
-		JSON.stringify(
-			{
-				'@context': 'https://schema.org',
-				'@type': 'Restaurant',
-				name: 'Istanbul Restaurant',
-				url: `${page.url.origin}${page.url.pathname}`.replace(/\/$/, ''),
-				areaServed: { '@type': 'City', name: 'Maputo' },
-				address: { '@type': 'PostalAddress', addressLocality: 'Maputo', addressCountry: 'MZ' },
-				servesCuisine: ['Turkish', 'Mediterranean'],
-				priceRange: '$$',
-				hasMenu: `${page.url.origin}${localizeHref('/menu')}`,
-				openingHoursSpecification: [
-					{
-						'@type': 'OpeningHoursSpecification',
-						dayOfWeek: [
-							'Monday',
-							'Tuesday',
-							'Wednesday',
-							'Thursday',
-							'Friday',
-							'Saturday',
-							'Sunday'
-						],
-						opens: '07:00',
-						closes: '23:00'
-					}
-				],
-				hasPOS: [
-					{
-						'@type': 'FoodEstablishment',
-						name: 'Istanbul Restaurant — Maputo Shopping Center',
-						address: {
-							'@type': 'PostalAddress',
-							streetAddress: 'Maputo Shopping Center',
-							addressLocality: 'Maputo',
-							addressCountry: 'MZ'
-						}
-					},
-					{
-						'@type': 'FoodEstablishment',
-						name: 'Istanbul Restaurant — Baía-Mall',
-						address: {
-							'@type': 'PostalAddress',
-							streetAddress: 'Baía-Mall',
-							addressLocality: 'Maputo',
-							addressCountry: 'MZ'
-						}
-					}
-				]
+	const jsonLd = $derived(() => ({
+			"@context": "https://schema.org",
+			"@type": "Restaurant",
+			name: "Istanbul Restaurant",
+			url: `${page.url.origin}${page.url.pathname}`.replace(/\/$/, ''),
+			areaServed: { "@type": "City", name: "Maputo" },
+			address: {
+				"@type": "PostalAddress",
+				addressLocality: "Maputo",
+				addressCountry: "MZ"
 			},
-			null,
-			0
-		)
-	);
+			servesCuisine: ["Turkish", "Mediterranean"],
+			priceRange: "$$",
+			hasMenu: `${page.url.origin}${localizeHref('/menu')}`,
+			openingHoursSpecification: [
+				{
+				"@type": "OpeningHoursSpecification",
+				dayOfWeek: [
+					"Monday",
+					"Tuesday",
+					"Wednesday",
+					"Thursday",
+					"Friday",
+					"Saturday",
+					"Sunday"
+				],
+				opens: "07:00",
+				closes: "23:00"
+				}
+			],
+			hasPOS: [
+				{
+				"@type": "FoodEstablishment",
+				name: "Istanbul Restaurant — Maputo Shopping Center",
+				address: {
+					"@type": "PostalAddress",
+					streetAddress: "Maputo Shopping Center",
+					addressLocality: "Maputo",
+					addressCountry: "MZ"
+				}
+				},
+				{
+				"@type": "FoodEstablishment",
+				name: "Istanbul Restaurant — Baía-Mall",
+				address: {
+					"@type": "PostalAddress",
+					streetAddress: "Baía-Mall",
+					addressLocality: "Maputo",
+					addressCountry: "MZ"
+				}
+				}
+			]
+}));
+
 
 	const ogImage = $derived(() => new URL(ogImageAssetUrl, page.url.origin).toString());
 </script>
@@ -97,7 +96,9 @@
 	<meta name="twitter:description" content={seoDescription} />
 	<meta name="twitter:image" content={ogImage} />
 
-	<script type="application/ld+json">{jsonLd}</script>
+	<script type="application/ld+json">
+    {@html JSON.stringify(jsonLd)}
+  	</script>
 </svelte:head>
 
 <!-- <Design_1/> -->
