@@ -701,6 +701,7 @@
 	"bag_estimated_total": "Estimated Total",
 	"bag_order_whatsapp": "Order Now via WhatsApp",
 	"bag_wa_greeting": "Hello! I would like to place the following order:",
-	"bag_wa_total": "Total"
+	"bag_wa_total": "Total",
+	"footer_link_sitemap": "Sitemap"
 
 }

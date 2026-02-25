@@ -704,6 +704,7 @@
 	"bag_estimated_total": "Tahmini Toplam",
 	"bag_order_whatsapp": "WhatsApp ile Sipariş Ver",
 	"bag_wa_greeting": "Merhaba! Aşağıdaki siparişi vermek istiyorum:",
-	"bag_wa_total": "Toplam"
+	"bag_wa_total": "Toplam",
+	"footer_link_sitemap": "Site Haritası"
 
 }
