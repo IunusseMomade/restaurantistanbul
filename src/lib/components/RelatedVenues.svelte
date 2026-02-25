@@ -140,12 +140,14 @@
 					href={item.href}
 					class="group block shrink-0 snap-start w-[85vw] sm:w-[350px] cursor-pointer border border-transparent bg-white transition-all duration-300 hover:border-gray-100 hover:shadow-xl"
 					aria-label={item.name()}
+					itemscope itemtype="https://schema.org/MenuItem"
 				>
 					<div class="relative h-[220px] overflow-hidden">
 						<enhanced:img
 							src={item.image}
 							alt={item.name()}
 							class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+							itemprop="image"
 						/>
 						<div class="absolute top-4 right-4 rounded-full bg-white/90 p-2 opacity-0 transition-opacity group-hover:opacity-100">
 							<ChevronRight size={16} class="text-primary" />
@@ -153,23 +155,25 @@
 					</div>
 
 					<div class="p-6">
-						<h4 class="font-serif mb-2 text-lg text-gray-900 transition-colors group-hover:text-primary">
+						<h4 class="font-serif mb-2 text-lg text-gray-900 transition-colors group-hover:text-primary" itemprop="name">
 							{item.name()}
 						</h4>
-						<p class="mb-4 h-8 text-xs text-gray-500 line-clamp-2">{item.desc()}</p>
+						<p class="mb-4 h-8 text-xs text-gray-500 line-clamp-2" itemprop="description">{item.desc()}</p>
 
 						<div class="mb-6 grid grid-cols-2 gap-y-2 text-[10px] font-bold uppercase tracking-wider text-gray-400">
 							<div class="flex items-center gap-1 text-secondary">
 								<Utensils size={10} class="text-primary" />
 								{item.category()}
 							</div>
-							<div class="flex items-center gap-1">
+							<div class="flex items-center gap-1" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
 								<Tag size={10} class="text-accent" />
-								{item.price()}
+								<meta itemprop="priceCurrency" content="MZN" />
+								<span itemprop="price" content={item.price().replace(/[^0-9]/g, '')}>{item.price()}</span>
 							</div>
 						</div>
 
 						<div class="flex items-center justify-between border-t border-gray-100 pt-4">
+
 							<!-- Changed span to button with WhatsApp logic -->
 							<button 
 								type="button"

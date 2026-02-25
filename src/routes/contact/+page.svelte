@@ -3,18 +3,33 @@
 	// import HeaderSimple from '$lib/components/HeaderSimple.svelte';
 	// import Footer from '$lib/components/Footer.svelte';
 	import * as m from '$lib/paraglide/messages';
+	import { page } from '$app/state';
+	import Seo from '$lib/components/Seo.svelte';
+
+	const seoTitle = m.contact_seo_title();
+	const seoDescription = m.contact_seo_description();
+	const seoKeywords = m.contact_seo_keywords();
+	const canonical = $derived(() => `${page.url.origin}${page.url.pathname}`.replace(/\/$/, ''));
 </script>
+
+<Seo 
+	title={seoTitle} 
+	description={seoDescription} 
+	keywords={seoKeywords}
+	url={canonical}
+	siteName="Istanbul Restaurant"
+/>
 
 <!-- <HeaderSimple forceSolid /> -->
 
-<div class="min-h-[60vh] bg-gray-50 py-20">
+<div class="min-h-[60vh] bg-gray-50 py-20" itemscope itemtype="https://schema.org/ContactPage">
 	<div class="container mx-auto px-6">
-		<h1 class="mb-4 text-center font-serif text-4xl">{m.contact_title()}</h1>
-		<p class="mx-auto mb-16 max-w-2xl text-center text-gray-600">
+		<h1 class="mb-4 text-center font-serif text-4xl" itemprop="name">{m.contact_title()}</h1>
+		<p class="mx-auto mb-16 max-w-2xl text-center text-gray-600" itemprop="description">
 			{m.contact_intro()}
 		</p>
 
-		<div class="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2">
+		<div class="mx-auto grid max-w-6xl gap-12 lg:grid-cols-2" itemprop="mainEntity" itemscope itemtype="https://schema.org/Restaurant">
 			<!-- Left Column: Contact Info & Socials -->
 			<div class="space-y-8">
 				<!-- Contact Info -->
@@ -34,6 +49,7 @@
 									rel="noopener noreferrer"
 									aria-label="Chat on WhatsApp: +258 84 713 1300"
 									class="mt-1 inline-block text-gray-600 transition-colors hover:text-primary"
+									itemprop="telephone"
 								>
 									+258 84 713 1300
 								</a>
@@ -49,6 +65,7 @@
 								<a
 									href="mailto:mozambik.istanbul@gmail.com"
 									class="mt-1 block text-gray-600 transition-colors hover:text-primary"
+									itemprop="email"
 								>
 									mozambik.istanbul@gmail.com
 								</a>
@@ -61,8 +78,9 @@
 							</div>
 							<div>
 								<h3 class="font-medium text-gray-900">{m.contact_main_location()}</h3>
-								<p class="mt-1 text-gray-600">
-									Rua Ngungunhane, 85 - Loja G 25 R/C<br />Maputo Shopping Center
+								<p class="mt-1 text-gray-600" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+									<span itemprop="streetAddress">Rua Ngungunhane, 85 - Loja G 25 R/C</span><br />
+									<span itemprop="addressLocality">Maputo Shopping Center</span>
 								</p>
 							</div>
 						</div>
@@ -78,6 +96,7 @@
 							target="_blank"
 							rel="noopener noreferrer"
 							class="group flex items-center gap-3 rounded-full border border-gray-200 px-5 py-2.5 transition-all hover:border-primary hover:bg-primary/5"
+							itemprop="sameAs"
 						>
 							<Facebook size={18} class="text-gray-400 group-hover:text-primary" />
 							<span class="text-sm font-medium text-gray-700 group-hover:text-primary"
@@ -90,6 +109,7 @@
 							target="_blank"
 							rel="noopener noreferrer"
 							class="group flex items-center gap-3 rounded-full border border-gray-200 px-5 py-2.5 transition-all hover:border-primary hover:bg-primary/5"
+							itemprop="sameAs"
 						>
 							<Instagram size={18} class="text-gray-400 group-hover:text-primary" />
 							<span class="text-sm font-medium text-gray-700 group-hover:text-primary"
@@ -102,6 +122,7 @@
 							target="_blank"
 							rel="noopener noreferrer"
 							class="group flex items-center gap-3 rounded-full border border-gray-200 px-5 py-2.5 transition-all hover:border-primary hover:bg-primary/5"
+							itemprop="sameAs"
 						>
 							<Video size={18} class="text-gray-400 group-hover:text-primary" />
 							<span class="text-sm font-medium text-gray-700 group-hover:text-primary"
@@ -111,6 +132,7 @@
 					</div>
 				</div>
 			</div>
+
 
 			<!-- Right Column: Contact Form -->
 			<div class="rounded-lg border border-gray-200 bg-white p-8 lg:p-10">

@@ -14,29 +14,21 @@
   import * as m from '$lib/paraglide/messages';
   import { page } from '$app/state';
   import { localizeHref } from '$lib/paraglide/runtime';
+  import Seo from '$lib/components/Seo.svelte';
 
   const seoTitle = m.about_seo_title();
   const seoDescription = m.about_seo_description();
+  const seoKeywords = m.about_seo_keywords();
   const canonical = $derived(() => `${page.url.origin}${page.url.pathname}`.replace(/\/$/, ''));
 </script>
 
-<svelte:head>
-  <title>{seoTitle}</title>
-  <meta name="description" content={seoDescription} />
-  <meta name="robots" content="index,follow,max-image-preview:large" />
-  <link rel="canonical" href={canonical} />
-
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content={seoTitle} />
-  <meta property="og:description" content={seoDescription} />
-  <meta property="og:url" content={canonical} />
-  <meta property="og:site_name" content="Istanbul Restaurant" />
-  <meta property="og:locale" content="pt_MZ" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content={seoTitle} />
-  <meta name="twitter:description" content={seoDescription} />
-</svelte:head>
+<Seo 
+	title={seoTitle} 
+	description={seoDescription} 
+	keywords={seoKeywords}
+	url={canonical}
+	siteName="Istanbul Restaurant"
+/>
 
 <div class="min-h-screen bg-white text-gray-800 font-sans selection:bg-[#C5A059] selection:text-white">
 	<!-- <HeaderSimple /> -->
@@ -75,19 +67,19 @@
 	</section>
 
 	<!-- --- 3. ABOUT / STORY --- -->
-	<section class="py-20 md:py-32 container mx-auto px-6">
-		<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+	<section class="py-20 md:py-32 container mx-auto px-6" itemscope itemtype="https://schema.org/AboutPage">
+		<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center" itemprop="mainEntity" itemscope itemtype="https://schema.org/Restaurant">
 			<!-- Text Side -->
 			<div class="order-2 lg:order-1">
 				<span class="text-[#C5A059] text-xs font-bold uppercase tracking-[0.2em] mb-4 block">
 					{m.about_section_label()}
 				</span>
 
-				<h2 class="font-serif text-4xl md:text-5xl text-gray-900 mb-8 leading-tight">
+				<h2 class="font-serif text-4xl md:text-5xl text-gray-900 mb-8 leading-tight" itemprop="name">
 					{@html m.about_h2_html()}
 				</h2>
 
-				<div class="space-y-6 text-gray-500 font-light text-base leading-8">
+				<div class="space-y-6 text-gray-500 font-light text-base leading-8" itemprop="description">
 					<p>{m.about_p1()}</p>
 					<p>{m.about_p2()}</p>
 					<p>
@@ -97,8 +89,9 @@
 				</div>
 
 				<div class="mt-10">
-					<enhanced:img src={person_2} alt={m.about_alt_ambience()} />
+					<enhanced:img src={person_2} alt={m.about_alt_ambience()} itemprop="image" />
 				</div>
+
 
 				<div class="mt-8 flex flex-wrap gap-3">
 					<a

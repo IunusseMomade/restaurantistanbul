@@ -15,12 +15,14 @@
 </script>
 
 <!-- Hero Section -->
-<div class="relative h-[500px] w-full">
+<div class="relative h-[500px] w-full" itemscope itemtype="https://schema.org/Restaurant">
+	<meta itemprop="name" content="Istanbul Restaurant" />
 	<div class="absolute inset-0">
 		<enhanced:img
 			src={section1_1}
 			alt="Luxury Dining"
 			class={`h-full w-full object-cover hero-img ${heroReady ? 'is-ready' : ''}`}
+			itemprop="image"
 		/>
 		<div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent"></div>
 	</div>
@@ -29,13 +31,14 @@
 		<div class={`max-w-xl text-white hero ${heroReady ? 'is-ready' : ''}`}>
 			<h5 class="mb-4 text-overline text-primary hero-item hero-item-1">{m.hero_welcome()}</h5>
 
-			<h1 class="font-serif mb-6 text-5xl leading-tight md:text-6xl hero-item hero-item-2">
+			<h1 class="font-serif mb-6 text-5xl leading-tight md:text-6xl hero-item hero-item-2" itemprop="slogan">
 				{@html m.home_header_h1_html()}
 			</h1>
 
-			<p class="mb-8 text-sm font-light leading-relaxed text-gray-200 md:text-base hero-item hero-item-3">
+			<p class="mb-8 text-sm font-light leading-relaxed text-gray-200 md:text-base hero-item hero-item-3" itemprop="description">
 				{@html m.home_header_desc_html()}
 			</p>
+
 
 			<a
 				href={localizeHref('/menu')}
@@ -57,7 +60,7 @@
 			>
 			<a href="#signature-dishes" class="transition-colors hover:text-gray-900">{m.subnav_dishes()}</a>
 			<a href="#gallery" class="transition-colors hover:text-gray-900">{m.subnav_gallery()}</a>
-			<a href="#membership" class="transition-colors hover:text-gray-900">{m.subnav_membership()}</a>
+			<a href="#special-offer" class="transition-colors hover:text-gray-900">{m.subnav_special_offer()}</a>
 			<a href="#info" class="transition-colors hover:text-gray-900">{m.subnav_info()}</a>
 		</div>
 	</div>

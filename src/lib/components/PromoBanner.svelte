@@ -4,7 +4,7 @@
 	import { Gift, Sparkles } from '@lucide/svelte';
 	import * as m from '$lib/paraglide/messages';
 </script>
-<section id="membership" class="relative flex h-125 w-full items-center overflow-hidden">
+<section id="special-offer" class="relative flex h-125 w-full items-center overflow-hidden">
 	<!-- Parallax-like Background -->
 	<div class="absolute inset-0">
 		<enhanced:img

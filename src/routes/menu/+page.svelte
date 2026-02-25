@@ -2,7 +2,9 @@
 	// import HeaderSimple from '$lib/components/HeaderSimple.svelte';
 	import ImageViewer from '$lib/components/ImageViewer.svelte';
 	import * as m from '$lib/paraglide/messages';
+	import { page } from '$app/state';
 	import { onMount } from 'svelte';
+	import Seo from '$lib/components/Seo.svelte';
 	import {
 		Clock,
 		MapPin,
@@ -29,6 +31,11 @@
 	
 	// Ref for the OrderBag component
 	let orderBagRef = $state();
+
+	const seoTitle = m.menu_seo_title();
+	const seoDescription = m.menu_seo_description();
+	const seoKeywords = m.menu_seo_keywords();
+	const canonical = $derived(() => `${page.url.origin}${page.url.pathname}`.replace(/\/$/, ''));
 
 	// import Footer from "$lib/components/Footer.svelte";
 	import OrderBag from "$lib/components/OrderBag.svelte"
@@ -475,10 +482,13 @@
 	});
 </script>
 
-
-<svelte:head>
-	<!-- <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"> -->
-</svelte:head>
+<Seo 
+	title={seoTitle} 
+	description={seoDescription} 
+	keywords={seoKeywords}
+	url={canonical}
+	siteName="Istanbul Restaurant"
+/>
 
 <div class="min-h-screen bg-white text-gray-800 font-sans selection:bg-[#C5A059] selection:text-white">
 	
@@ -528,7 +538,7 @@
 </div>
 
 	<!-- --- 3. MENU CONTENT --- -->
-	<div class="container mx-auto px-6 py-20 max-w-5xl">
+	<div class="container mx-auto px-6 py-20 max-w-5xl" itemscope itemtype="https://schema.org/Menu">
 
 		<OrderBag
 		  bind:this={orderBagRef}
@@ -541,19 +551,19 @@
 				
 				<!-- Special Layout for Steakhouse (Dark Theme) -->
 				{#if category.id === 'steakhouse'}
-					<div id={category.id} class="bg-[#1a1a1a] text-white p-10 md:p-16 -mx-6 md:-mx-20 mb-24 relative overflow-hidden scroll-mt-32 rounded-lg shadow-2xl">
+					<div id={category.id} class="bg-[#1a1a1a] text-white p-10 md:p-16 -mx-6 md:-mx-20 mb-24 relative overflow-hidden scroll-mt-32 rounded-lg shadow-2xl" itemprop="hasMenuSection" itemscope itemtype="https://schema.org/MenuSection">
 						<!-- Background Texture Effect -->
 						<div class="absolute top-0 right-0 w-64 h-64 bg-[#C5A059] rounded-full filter blur-[100px] opacity-10"></div>
 						
 						<div class="relative z-10">
 							<div class="text-center mb-12">
 								<span class="text-[#C5A059] tracking-[0.2em] text-xs font-bold uppercase mb-2 block">{m.premium_cuts()}</span>
-								<h2 class="font-serif text-4xl uppercase tracking-wide text-white">{category.label}</h2>
+								<h2 class="font-serif text-4xl uppercase tracking-wide text-white" itemprop="name">{category.label}</h2>
 							</div>
 
 							<div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
 								{#each menuItems[category.id] as item}
-									<div class="group flex gap-4 items-start">
+									<div class="group flex gap-4 items-start" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
 										{#if item.image}
 											<button 
 												type="button"
@@ -561,7 +571,7 @@
 												class="shrink-0 bg-transparent border-none p-0 cursor-pointer" 
 												aria-label="View full image"
 											>
-												<enhanced:img src={item.image} alt={item.name} class="w-20 h-20 object-cover rounded-sm shadow-lg border border-gray-700 hover:opacity-80 transition-opacity" />
+												<enhanced:img src={item.image} alt={item.name} class="w-20 h-20 object-cover rounded-sm shadow-lg border border-gray-700 hover:opacity-80 transition-opacity" itemprop="image" />
 											</button>
 										{/if}
 										<!-- Made the text area clickable for adding to cart -->
@@ -570,12 +580,15 @@
 											onclick={() => handleAddItem(item)}
 										>
 											<div class="flex justify-between items-baseline mb-2 border-b border-gray-700 pb-2">
-												<h3 class="font-serif text-xl font-medium text-[#C5A059] group-hover:text-white transition-colors">
+												<h3 class="font-serif text-xl font-medium text-[#C5A059] group-hover:text-white transition-colors" itemprop="name">
 													{item.name}
 												</h3>
-												<span class="font-serif text-xl font-light">{item.price}</span>
+												<span class="font-serif text-xl font-light" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+													<meta itemprop="priceCurrency" content="MZN" />
+													<span itemprop="price" content={item.price}>{item.price}</span>
+												</span>
 											</div>
-											<p class="text-gray-400 text-sm font-light leading-relaxed">{item.desc}</p>
+											<p class="text-gray-400 text-sm font-light leading-relaxed" itemprop="description">{item.desc}</p>
 										</button>
 									</div>
 								{/each}
@@ -585,19 +598,19 @@
 
 				<!-- Standard Layout for other categories -->
 				{:else}
-					<div id={category.id} class="mb-24 scroll-mt-32">
+					<div id={category.id} class="mb-24 scroll-mt-32" itemprop="hasMenuSection" itemscope itemtype="https://schema.org/MenuSection">
 						<div class="text-center mb-12">
 							{#if category.id === 'starters'}
 								<span class="text-[#C5A059] text-4xl block mb-2">~</span>
 							{:else}
 								<div class="w-16 h-[1px] bg-[#C5A059] mx-auto mb-6"></div>
 							{/if}
-							<h2 class="font-serif text-4xl text-gray-900 uppercase tracking-wide">{category.label}</h2>
+							<h2 class="font-serif text-4xl text-gray-900 uppercase tracking-wide" itemprop="name">{category.label}</h2>
 						</div>
 						
 						<div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10">
 							{#each menuItems[category.id] as item}
-								<div class="group flex gap-4 items-start">
+								<div class="group flex gap-4 items-start" itemprop="hasMenuItem" itemscope itemtype="https://schema.org/MenuItem">
 									{#if item.image}
 										<button 
 											type="button"
@@ -605,7 +618,7 @@
 											class="shrink-0 bg-transparent border-none p-0 cursor-pointer" 
 											aria-label="View full image"
 										>
-											<enhanced:img src={item.image} alt={item.name} class="w-20 h-20 object-cover rounded-sm shadow-md hover:opacity-80 transition-opacity" />
+											<enhanced:img src={item.image} alt={item.name} class="w-20 h-20 object-cover rounded-sm shadow-md hover:opacity-80 transition-opacity" itemprop="image" />
 										</button>
 									{/if}
 									<!-- Made the text area clickable for adding to cart -->
@@ -614,12 +627,15 @@
 										onclick={() => handleAddItem(item)}
 									>
 										<div class="flex justify-between items-baseline mb-2 border-b border-dotted border-gray-300 pb-1">
-											<h3 class="font-serif text-lg text-gray-800 font-medium group-hover:text-[#C5A059] transition-colors">
+											<h3 class="font-serif text-lg text-gray-800 font-medium group-hover:text-[#C5A059] transition-colors" itemprop="name">
 												{item.name}
 											</h3>
-											<span class="font-serif text-lg font-bold text-[#C5A059]">{item.price}</span>
+											<span class="font-serif text-lg font-bold text-[#C5A059]" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+												<meta itemprop="priceCurrency" content="MZN" />
+												<span itemprop="price" content={item.price}>{item.price}</span>
+											</span>
 										</div>
-										<p class="text-gray-500 text-sm font-light leading-relaxed">{item.desc}</p>
+										<p class="text-gray-500 text-sm font-light leading-relaxed" itemprop="description">{item.desc}</p>
 										{#if item.dietary}
 											<span class="text-[10px] text-gray-400 uppercase tracking-wider mt-1 block">{item.dietary === 'V' ? m.dietary_veg() : item.dietary}</span>
 										{/if}

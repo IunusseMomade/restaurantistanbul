@@ -183,7 +183,7 @@
 				>
 				<a href="#signature-dishes" class="transition-colors hover:text-gray-900">{m.subnav_dishes()}</a>
 				<a href="#gallery" class="transition-colors hover:text-gray-900">{m.subnav_gallery()}</a>
-				<a href="#membership" class="transition-colors hover:text-gray-900">{m.subnav_membership()}</a>
+				<a href="#membership" class="transition-colors hover:text-gray-900">{m.subnav_special_offer()}</a>
 				<a href="#info" class="transition-colors hover:text-gray-900">{m.subnav_info()}</a>
 			</div>
 		</div>
