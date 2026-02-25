@@ -18,9 +18,9 @@
 	const seoDescription = m.home_seo_description();
 	const seoKeywords = m.home_seo_keywords();
 
-	const canonical = $derived(() => `${page.url.origin}${page.url.pathname}`.replace(/\/$/, ''));
+	const canonical = $derived(`${page.url.origin}${page.url.pathname}`.replace(/\/$/, ''));
 
-	const ogImage = $derived(() => new URL(ogImageAssetUrl, page.url.origin).toString());
+	const ogImage = $derived(new URL(ogImageAssetUrl, page.url.origin).toString());
 
 	const jsonLd = $derived({
 		"@context": "https://schema.org",

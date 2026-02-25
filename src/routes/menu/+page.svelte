@@ -35,7 +35,7 @@
 	const seoTitle = m.menu_seo_title();
 	const seoDescription = m.menu_seo_description();
 	const seoKeywords = m.menu_seo_keywords();
-	const canonical = $derived(() => `${page.url.origin}${page.url.pathname}`.replace(/\/$/, ''));
+	const canonical = $derived(`${page.url.origin}${page.url.pathname}`.replace(/\/$/, ''));
 
 	// import Footer from "$lib/components/Footer.svelte";
 	import OrderBag from "$lib/components/OrderBag.svelte"

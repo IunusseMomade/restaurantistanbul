@@ -9,7 +9,7 @@
 	const seoTitle = m.contact_seo_title();
 	const seoDescription = m.contact_seo_description();
 	const seoKeywords = m.contact_seo_keywords();
-	const canonical = $derived(() => `${page.url.origin}${page.url.pathname}`.replace(/\/$/, ''));
+	const canonical = $derived(`${page.url.origin}${page.url.pathname}`.replace(/\/$/, ''));
 </script>
 
 <Seo 
