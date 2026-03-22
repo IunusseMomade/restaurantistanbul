@@ -1,9 +1,17 @@
 <script lang="ts">
+    import { page } from '$app/state';
+    import { baseLocale, deLocalizeHref, locales, localizeHref } from '$lib/paraglide/runtime';
+
 	interface JsonLd {
 		'@context': string;
 		'@type': string;
 		[key: string]: any;
 	}
+
+    interface AlternateLink {
+        lang: string;
+        href: string;
+    }
 
 	interface Props {
 		title: string;
@@ -32,6 +40,49 @@
 		siteName = '',
 		type = 'website'
 	}: Props = $props();
+
+    function toNormalizedAbsoluteUrl(input: string, origin: string): URL | null {
+        try {
+            const parsed = new URL(input, origin);
+            parsed.hash = '';
+            if (parsed.pathname !== '/' && parsed.pathname.endsWith('/')) {
+                parsed.pathname = parsed.pathname.slice(0, -1);
+            }
+            return parsed;
+        } catch {
+            return null;
+        }
+    }
+
+    const canonicalUrl = $derived.by(() => {
+        const fallback = `${page.url.origin}${page.url.pathname}`;
+        const parsed = toNormalizedAbsoluteUrl(url || fallback, page.url.origin);
+        return parsed ? parsed.toString() : fallback;
+    });
+
+    const alternates = $derived.by((): AlternateLink[] => {
+        const parsedCanonical = toNormalizedAbsoluteUrl(canonicalUrl, page.url.origin);
+        if (!parsedCanonical) return [];
+
+        const deLocalizedPath = deLocalizeHref(parsedCanonical.pathname);
+
+        return locales.map((locale) => {
+            const localizedPath = localizeHref(deLocalizedPath, { locale });
+            const localizedUrl = new URL(localizedPath, parsedCanonical.origin);
+            if (localizedUrl.pathname !== '/' && localizedUrl.pathname.endsWith('/')) {
+                localizedUrl.pathname = localizedUrl.pathname.slice(0, -1);
+            }
+
+            return {
+                lang: locale,
+                href: localizedUrl.toString()
+            };
+        });
+    });
+
+    const xDefaultHref = $derived.by(
+        () => alternates.find((alternate) => alternate.lang === baseLocale)?.href ?? canonicalUrl
+    );
 </script>
 
 <svelte:head>
@@ -54,10 +105,12 @@
         content={`${noindex ? "noindex" : "index"},${nofollow ? "nofollow" : "follow"}`}
     />
     
-    {#if url}
-        <link rel="canonical" href={url} />
-        <meta property="og:url" content={url} />
-    {/if}
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:url" content={canonicalUrl} />
+    {#each alternates as alternate}
+        <link rel="alternate" hreflang={alternate.lang} href={alternate.href} />
+    {/each}
+    <link rel="alternate" hreflang="x-default" href={xDefaultHref} />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content={type} />
