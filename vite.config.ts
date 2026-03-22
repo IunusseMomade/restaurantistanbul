@@ -3,12 +3,18 @@ import tailwindcss from '@tailwindcss/vite';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
 import { enhancedImages } from '@sveltejs/enhanced-img';
+import { paraglideStrategy, paraglideUrlPatterns } from './paraglide.config.js';
 
 export default defineConfig({
 	plugins: [
 		tailwindcss(),
 		enhancedImages(),
 		sveltekit(),
-		paraglideVitePlugin({ project: './project.inlang', outdir: './src/lib/paraglide' })
+		paraglideVitePlugin({
+			project: './project.inlang',
+			outdir: './src/lib/paraglide',
+			strategy: paraglideStrategy,
+			urlPatterns: paraglideUrlPatterns
+		})
 	]
 });

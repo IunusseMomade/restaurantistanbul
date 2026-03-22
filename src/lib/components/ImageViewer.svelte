@@ -34,6 +34,7 @@
 		if (e.key === 'ArrowLeft') prev();
 		if (e.key === 'Escape') onClose();
 	}
+
 </script>
 
 <svelte:window onkeydown={handleKeydown} />
@@ -64,11 +65,11 @@
 		</button>
 	{/if}
 
-	<enhanced:img 
-		src={images[currentIndex]} 
-		alt="Full view" 
+	<enhanced:img
+		src={images[currentIndex]}
+		alt="Full view"
 		class="full-image"
-		onclick={(e) => e.stopPropagation()} 
+		onclick={(e) => e.stopPropagation()}
 	/>
 
 	{#if images.length > 1}

@@ -133,6 +133,7 @@
 
 	//header
 	import menu_header from '$lib/assets/images/menu-header-2.jpeg?enhanced';
+	import menu_platter_unsplash from '$lib/assets/images/external/menu-platter-unsplash.jpg?enhanced';
 
 	
 	
@@ -648,8 +649,8 @@
 					<!-- Feature Image Break after Starters -->
 					{#if category.id === 'starters'}
 						<div class="w-full h-[400px] mb-24 relative rounded-sm overflow-hidden">
-							<img 
-								src="https://images.unsplash.com/photo-1594041680534-e8c8cdebd659?auto=format&fit=crop&q=80&w=1600" 
+							<enhanced:img
+								src={menu_platter_unsplash}
 								alt="Platter"
 								class="w-full h-full object-cover"
 							/>

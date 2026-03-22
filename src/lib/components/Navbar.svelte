@@ -3,7 +3,8 @@
 	import { fade, slide } from 'svelte/transition';
 	import { Menu, X } from '@lucide/svelte';
 	import * as m from '$lib/paraglide/messages';
-	import { localizeHref } from '$lib/paraglide/runtime';
+	import { localizeHref, locales } from '$lib/paraglide/runtime';
+	import { page } from '$app/state';
 	import logo from '$lib/assets/ir-logo.png?enhanced';
 
 	let { forceSolid = false } = $props();
@@ -13,6 +14,19 @@
 
 	const navSolid = $derived(forceSolid || isScrolled || isMenuOpen);
 	const navLinkClass = $derived(navSolid ? 'link-hover' : 'link-hover text-white/90 hover:text-white');
+
+	const activeLocale = $derived.by(() => {
+		// Keep this derived value reactive on navigation updates.
+		page.url.pathname;
+		page.url.search;
+		page.url.hash;
+
+		const pathname = typeof window === 'undefined' ? page.url.pathname : window.location.pathname;
+		const found = locales.find((locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`));
+		return found ?? 'pt';
+	});
+
+	const hrefFor = (path) => localizeHref(path, { locale: activeLocale });
 
 	onMount(() => {
 		const onScroll = () => {
@@ -48,7 +62,7 @@
 				<!-- Brand -->
 				<div class="flex items-center">
 					<a
-						href={localizeHref('/')}
+						href={hrefFor('/')}
 						class="inline-flex items-center gap-3 text-inherit no-underline"
 						aria-label="Restaurant Istanbul"
 					>
@@ -61,10 +75,10 @@
 
 				<!-- Desktop Nav -->
 				<div class="hidden items-center gap-8 text-sm font-medium tracking-wide md:flex">
-					<a href={localizeHref('/locations')} class={navLinkClass}>{m.nav_locations()}</a>
-					<a href={localizeHref('/menu')} class={navLinkClass}>{m.nav_menu()}</a>
-					<a href={localizeHref('/about')} class={navLinkClass}>{m.nav_story()}</a>
-					<a href={localizeHref('/contact')} class={navLinkClass}>{m.nav_contact()}</a>
+					<a href={hrefFor('/locations')} class={navLinkClass}>{m.nav_locations()}</a>
+					<a href={hrefFor('/menu')} class={navLinkClass}>{m.nav_menu()}</a>
+					<a href={hrefFor('/about')} class={navLinkClass}>{m.nav_story()}</a>
+					<a href={hrefFor('/contact')} class={navLinkClass}>{m.nav_contact()}</a>
 
 					<div class="ml-4 flex items-center gap-4">
 						<a
@@ -122,10 +136,10 @@
 				transition:slide={{ duration: 180 }}
 			>
 				<nav class="flex flex-col gap-6 text-sm font-medium tracking-wide">
-					<a href={localizeHref('/locations')} class="link-hover" onclick={() => (isMenuOpen = false)}>{m.nav_locations()}</a>
-					<a href={localizeHref('/menu')} class="link-hover" onclick={() => (isMenuOpen = false)}>{m.nav_menu()}</a>
-					<a href={localizeHref('/about')} class="link-hover" onclick={() => (isMenuOpen = false)}>{m.nav_story()}</a>
-					<a href={localizeHref('/contact')} class="link-hover" onclick={() => (isMenuOpen = false)}>{m.nav_contact()}</a>
+					<a href={hrefFor('/locations')} class="link-hover" onclick={() => (isMenuOpen = false)}>{m.nav_locations()}</a>
+					<a href={hrefFor('/menu')} class="link-hover" onclick={() => (isMenuOpen = false)}>{m.nav_menu()}</a>
+					<a href={hrefFor('/about')} class="link-hover" onclick={() => (isMenuOpen = false)}>{m.nav_story()}</a>
+					<a href={hrefFor('/contact')} class="link-hover" onclick={() => (isMenuOpen = false)}>{m.nav_contact()}</a>
 
 					<div class="h-[1px] w-full bg-gray-100"></div>
 

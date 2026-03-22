@@ -1,15 +1,16 @@
 <script>
 	import { Play } from '@lucide/svelte';
+	import video_section_ambience from '$lib/assets/images/external/video-section-ambience-unsplash.jpg?enhanced';
 </script>
 
 <section class="relative h-[600px] w-full overflow-hidden bg-black">
 	<!-- Video Background Placeholder (Use a real video URL in production) -->
 	<div class="absolute inset-0 opacity-60">
-		<img 
-            src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?q=80&w=1974&auto=format&fit=crop" 
-            alt="Restaurant Ambience" 
-            class="h-full w-full object-cover"
-        />
+		<enhanced:img
+			src={video_section_ambience}
+			alt="Restaurant Ambience"
+			class="h-full w-full object-cover"
+		/>
         <!-- In a real scenario, use a video tag here:
 		<video autoplay loop muted playsinline class="h-full w-full object-cover">
 			<source src="/path/to/video.mp4" type="video/mp4" />

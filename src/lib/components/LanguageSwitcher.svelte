@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
-	import { deLocalizeHref, locales, localizeHref, setLocale } from '$lib/paraglide/runtime';
+	import { deLocalizeHref, locales, localizeHref } from '$lib/paraglide/runtime';
 	import { onMount } from 'svelte';
 
 	const labels = {
@@ -18,13 +18,22 @@
 		return found || 'pt';
 	}
 
-	function getCurrentHref() {
-		return page.url.pathname + page.url.search + page.url.hash;
-	}
+	const currentHref = $derived.by(() => {
+		// Track page.url to ensure this value updates on every SPA navigation.
+		page.url.pathname;
+		page.url.search;
+		page.url.hash;
+
+		if (typeof window === 'undefined') {
+			return page.url.pathname + page.url.search + page.url.hash;
+		}
+
+		return window.location.pathname + window.location.search + window.location.hash;
+	});
 
 	function getTargetHref(locale: (typeof locales)[number]) {
 		// Always de-localize first to avoid accidentally stacking prefixes.
-		const base = deLocalizeHref(getCurrentHref());
+		const base = deLocalizeHref(currentHref);
 		return localizeHref(base, { locale });
 	}
 
@@ -34,14 +43,19 @@
 
 		event.preventDefault();
 
-		// Update Paraglide's locale without forcing a full reload.
-		setLocale(locale, { reload: false });
-
 		// Navigate to the localized URL via SPA navigation (fast) so SSR/client stay aligned.
 		await goto(getTargetHref(locale), { noScroll: true, keepFocus: true });
 	}
 
-	let currentLocale = $derived(getCurrentLocale(page.url.pathname));
+	let currentLocale = $derived.by(() => {
+		// Keep reactive with SPA route changes.
+		page.url.pathname;
+		page.url.search;
+		page.url.hash;
+
+		const pathname = typeof window === 'undefined' ? page.url.pathname : window.location.pathname;
+		return getCurrentLocale(pathname);
+	});
 	let isHighlighted = $state(true);
 
 	onMount(() => {
