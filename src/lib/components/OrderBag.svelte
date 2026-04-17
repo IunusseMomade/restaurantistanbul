@@ -6,8 +6,12 @@
   // Props: phone number (WhatsApp) and enhanced image source for the bag
   let { phone = '258847131300', bagImage } = $props();
 
-  type MenuItem = { name: string; description?: string; price: string; image?: any };
+  type MenuItem = { name: string; description?: string; price: string; image?: unknown };
+  type IncomingMenuItem = { name: unknown; description?: unknown; price: unknown; image?: unknown };
   type CartItem = MenuItem & { quantity: number };
+  type PersistedCartItem = { name: string; description?: string; price: string; quantity: number };
+
+  const CART_STORAGE_KEY = 'order-bag-cart-v1';
 
   // Component state
   let cart = $state<CartItem[]>([]);
@@ -15,6 +19,59 @@
   let showTutorial = $state(false);
   let showCheckoutHint = $state(false);
   let checkoutTimer: ReturnType<typeof setTimeout>;
+  let storageReady = $state(false);
+
+  function loadCartFromStorage() {
+    try {
+      if (typeof localStorage === 'undefined') return;
+      const raw = localStorage.getItem(CART_STORAGE_KEY);
+      if (!raw) return;
+
+      const parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) return;
+
+      const restored: CartItem[] = parsed
+        .filter((item): item is PersistedCartItem =>
+          !!item &&
+          typeof item.name === 'string' &&
+          typeof item.price === 'string' &&
+          typeof item.quantity === 'number'
+        )
+        .map((item) => ({
+          name: item.name,
+          description: item.description,
+          price: item.price,
+          quantity: item.quantity
+        }));
+
+      if (restored.length) cart = restored;
+    } catch {
+      // Ignore malformed or unavailable storage.
+    }
+  }
+
+  function persistCartToStorage(nextCart: CartItem[] = cart) {
+    try {
+      if (typeof localStorage === 'undefined') return;
+      if (!storageReady) return;
+
+      const serializable: PersistedCartItem[] = nextCart.map((item) => ({
+        name: String(item.name ?? ''),
+        description: item.description == null ? undefined : String(item.description),
+        price: String(item.price ?? '0'),
+        quantity: item.quantity
+      }));
+
+      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(serializable));
+    } catch {
+      // Ignore storage quota/private mode issues.
+    }
+  }
+
+  $effect(() => {
+    // Re-run whenever cart mutates.
+    persistCartToStorage(cart);
+  });
 
   function getCartTotal() {
     return cart.reduce((total, item) => {
@@ -29,10 +86,22 @@
   }
 
   // Exposed API for parent: call via `bind:this` -> componentRef.addToCart(item)
-  export function addToCart(item: MenuItem) {
-    const idx = cart.findIndex((i) => i.name === item.name);
+  export function addToCart(item: IncomingMenuItem) {
+    const normalizedName = String(item.name ?? '');
+    const normalizedDescription = item.description == null ? undefined : String(item.description);
+    const normalizedPrice = String(item.price ?? '0');
+
+    const idx = cart.findIndex((i) => i.name === normalizedName);
     if (idx > -1) cart[idx].quantity += 1;
-    else cart.push({ ...item, quantity: 1 });
+    else cart.push({
+      name: normalizedName,
+      description: normalizedDescription,
+      price: normalizedPrice,
+      image: item.image,
+      quantity: 1
+    });
+
+    persistCartToStorage(cart);
 
     showTutorial = false;
 
@@ -49,6 +118,7 @@
 
   function removeFromCart(index: number) {
     cart.splice(index, 1);
+    persistCartToStorage(cart);
     if (cart.length === 0) {
       isCartOpen = false;
       setTimeout(() => {
@@ -62,8 +132,10 @@
 
   function updateQuantity(index: number, delta: number) {
     const newQty = cart[index].quantity + delta;
-    if (newQty > 0) cart[index].quantity = newQty;
-    else removeFromCart(index);
+    if (newQty > 0) {
+      cart[index].quantity = newQty;
+      persistCartToStorage(cart);
+    } else removeFromCart(index);
   }
 
   function proceedToOrder() {
@@ -78,6 +150,11 @@
   }
 
   onMount(() => {
+    loadCartFromStorage();
+    storageReady = true;
+    // Ensure storage reflects restored state immediately after hydration.
+    persistCartToStorage(cart);
+
     const initialTimer = setTimeout(() => {
       if (cart.length === 0) showTutorial = true;
     }, 1500);
@@ -104,44 +181,44 @@
 
 <div class="order-bag"> 
   <!-- FAB -->
-  <div class="fixed left-6 top-[55%] md:top-[40%] z-40 flex items-center gap-4" transition:scale={{ duration: 200, start: 0.8 }}>
+  <div class="fixed left-4 top-[55%] md:top-[42%] z-40 flex items-center gap-2.5 sm:gap-3" transition:scale={{ duration: 200, start: 0.8 }}>
     <button on:click={() => (isCartOpen = true)} aria-label={m.bag_open_label()} class="relative transition-transform active:scale-95 hover:scale-105">
       {#if bagImage}
-        <enhanced:img src={bagImage} alt="Cesto" class="sm:w-24 sm:h-24 w-18 h-18  object-contain drop-shadow-lg" />
+        <enhanced:img src={bagImage} alt="Cesto" class="w-16 h-16 sm:w-20 sm:h-20 object-contain drop-shadow-lg" />
       {:else}
         <!-- Changed default bg color for fallback icon -->
-        <div class="w-20 h-20 rounded-lg bg-[#1d140e] flex items-center justify-center text-white">🧺</div>
+        <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-lg bg-[#1d140e] flex items-center justify-center text-white">🧺</div>
       {/if}
 
       {#if getCartCount() > 0}
         <!-- Changed badge color to brand gold (#C5A059) -->
-        <span class="absolute -top-1 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-[#C5A059] text-[10px] font-bold text-white shadow-sm ring-2 ring-white">{getCartCount()}</span>
+        <span class="absolute -top-0.5 -right-1 sm:-top-0.5 sm:-right-1 flex h-3.5 w-3.5 sm:h-4 sm:w-4 items-center justify-center rounded-full bg-[#C5A059] text-[8px] sm:text-[9px] font-bold text-white shadow-sm ring-2 ring-white">{getCartCount()}</span>
       {/if}
     </button>
 
     {#if showTutorial && cart.length === 0}
       <!-- Changed notification bg to lighter gold (#EBC85E) for better contrast -->
-      <div class="relative bg-[#EBC85E] text-[#1d140e] px-4 py-3 rounded-xl shadow flex items-center gap-3 w-max max-w-[260px]" transition:fly={{ x: -20, duration: 400 }}>
+      <div class="relative bg-[#EBC85E] text-[#1d140e] px-2.5 sm:px-3 py-2 sm:py-2.5 rounded-xl shadow flex items-center gap-2 sm:gap-2.5 w-max max-w-[200px] sm:max-w-[230px]" transition:fly={{ x: -20, duration: 400 }}>
         <!-- Arrow matches bg -->
         <div class="absolute -left-1.5 top-1/2 -translate-y-1/2 w-3 h-3 bg-[#EBC85E] rotate-45"></div>
         <div class="flex items-center gap-3">
-          <div class="bg-black/10 p-1.5 rounded-full">🧾</div>
+          <div class="bg-black/10 p-1 rounded-full">🧾</div>
           <div>
-            <p class="text-xs font-black uppercase tracking-wide mb-0.5">{m.bag_start_order()}</p>
-            <p class="text-[10px] font-bold opacity-80">{m.bag_tap_to_add()}</p>
+            <p class="text-[9px] sm:text-[11px] font-black uppercase tracking-wide mb-0.5">{m.bag_start_order()}</p>
+            <p class="text-[8px] sm:text-[9px] font-bold opacity-80">{m.bag_tap_to_add()}</p>
           </div>
         </div>
       </div>
     {:else if showCheckoutHint && cart.length > 0}
       <!-- Changed notification bg to lighter gold (#EBC85E) -->
-      <div class="relative bg-[#EBC85E] text-[#1d140e] px-4 py-3 rounded-xl shadow flex items-center gap-3 w-max max-w-[260px]" transition:fly={{ x: -20, duration: 400 }}>
+      <div class="relative bg-[#EBC85E] text-[#1d140e] px-2.5 sm:px-3 py-2 sm:py-2.5 rounded-xl shadow flex items-center gap-2 sm:gap-2.5 w-max max-w-[200px] sm:max-w-[230px]" transition:fly={{ x: -20, duration: 400 }}>
         <!-- Arrow matches bg -->
         <div class="absolute -left-1.5 top-1/2 -translate-y-1/2 w-3 h-3 bg-[#EBC85E] rotate-45"></div>
         <div class="flex items-center gap-3">
-          <div class="bg-black/10 p-1.5 rounded-full">📣</div>
+          <div class="bg-black/10 p-1 rounded-full">📣</div>
           <div>
-            <p class="text-xs font-black uppercase tracking-wide mb-0.5">{m.bag_finish_order()}</p>
-            <p class="text-[10px] font-bold opacity-80">{m.bag_tap_to_send()}</p>
+            <p class="text-[9px] sm:text-[11px] font-black uppercase tracking-wide mb-0.5">{m.bag_finish_order()}</p>
+            <p class="text-[8px] sm:text-[9px] font-bold opacity-80">{m.bag_tap_to_send()}</p>
           </div>
         </div>
       </div>
@@ -170,7 +247,7 @@
             {#each cart as item, i}
               <div class="flex gap-3 items-start p-3 bg-gray-50 rounded-xl">
                 {#if item.image}
-                  <enhanced:img src={item.image} alt={item.name} class="w-16 h-16 object-contain rounded bg-white" />
+                  <enhanced:img src={item.image as never} alt={item.name} class="w-16 h-16 object-contain rounded bg-white" />
                 {/if}
                 <div class="flex-1 min-w-0">
                   <div class="flex justify-between items-start mb-1">

@@ -13,6 +13,8 @@
 	let currentIndex = $state(0);
 	let currentItemIndex = $state(0);
 	let currentImageIndex = $state(0);
+	let addFeedbackVisible = $state(false);
+	let addFeedbackToken = 0;
 
 	const isItemMode = $derived((items?.length ?? 0) > 0);
 	const currentItem = $derived(isItemMode ? items[currentItemIndex] : null);
@@ -107,6 +109,13 @@
 		e?.stopPropagation();
 		if (!isItemMode || !currentItem || !onAddToCart) return;
 		onAddToCart(currentItem);
+
+		addFeedbackToken += 1;
+		const token = addFeedbackToken;
+		addFeedbackVisible = true;
+		setTimeout(() => {
+			if (token === addFeedbackToken) addFeedbackVisible = false;
+		}, 900);
 	}
 
 	/** @param {KeyboardEvent} e */
@@ -131,7 +140,6 @@
 <svelte:window onkeydown={handleKeydown} />
 
 <!-- svelte-ignore a11y_click_events_have_key_events -->
-<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <div 
 	class="image-viewer-overlay"
 	onclick={(e) => {
@@ -195,6 +203,9 @@
 					title={uiLabels.addToCart}
 				>
 					<ShoppingBag size={17} />
+					{#if addFeedbackVisible}
+						<span class="add-mini-badge" aria-hidden="true">+1</span>
+					{/if}
 				</button>
 			{/if}
 		</div>
@@ -202,7 +213,7 @@
 
 	{#if isItemMode && currentImages.length > 1}
 		<div class="dots">
-			{#each currentImages as _, i}
+			{#each currentImages as imageSrc, i (imageSrc ?? i)}
 				<button 
 					class="dot {i === currentImageIndex ? 'active' : ''}"
 					onclick={(e) => { e.stopPropagation(); currentImageIndex = i; }}
@@ -212,7 +223,7 @@
 		</div>
 	{:else if !isItemMode && images.length > 1}
 		<div class="dots">
-			{#each images as _, i}
+			{#each images as imageSrc, i (imageSrc ?? i)}
 				<button 
 					class="dot {i === currentIndex ? 'active' : ''}"
 					onclick={(e) => { e.stopPropagation(); currentIndex = i; }}
@@ -377,12 +388,33 @@ transition: transform 0.16s ease, box-shadow 0.16s ease;
 display: inline-flex;
 align-items: center;
 justify-content: center;
+		position: relative;
 }
 
 .icon-action-btn:hover {
 transform: translateY(-1px);
 box-shadow: 0 8px 20px rgba(197, 160, 89, 0.3);
 }
+
+	.add-mini-badge {
+		position: absolute;
+		top: -0.45rem;
+		right: -0.4rem;
+		min-width: 1rem;
+		height: 1rem;
+		padding: 0 0.2rem;
+		border-radius: 9999px;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 0.58rem;
+		font-weight: 800;
+		line-height: 1;
+		color: #fff;
+		background: #c5a059;
+		box-shadow: 0 6px 16px rgba(197, 160, 89, 0.45);
+		animation: addBadgePop 0.28s ease-out;
+	}
 
 .dots {
 position: absolute;
@@ -494,4 +526,15 @@ to {
 opacity: 1;
 }
 }
+
+	@keyframes addBadgePop {
+		from {
+			opacity: 0;
+			transform: scale(0.7);
+		}
+		to {
+			opacity: 1;
+			transform: scale(1);
+		}
+	}
 </style>
