@@ -23,8 +23,8 @@
 
   function loadCartFromStorage() {
     try {
-      if (typeof localStorage === 'undefined') return;
-      const raw = localStorage.getItem(CART_STORAGE_KEY);
+      if (typeof sessionStorage === 'undefined') return;
+      const raw = sessionStorage.getItem(CART_STORAGE_KEY);
       if (!raw) return;
 
       const parsed = JSON.parse(raw);
@@ -52,7 +52,7 @@
 
   function persistCartToStorage(nextCart: CartItem[] = cart) {
     try {
-      if (typeof localStorage === 'undefined') return;
+      if (typeof sessionStorage === 'undefined') return;
       if (!storageReady) return;
 
       const serializable: PersistedCartItem[] = nextCart.map((item) => ({
@@ -62,7 +62,7 @@
         quantity: item.quantity
       }));
 
-      localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(serializable));
+      sessionStorage.setItem(CART_STORAGE_KEY, JSON.stringify(serializable));
     } catch {
       // Ignore storage quota/private mode issues.
     }
