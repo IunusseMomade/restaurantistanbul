@@ -23,7 +23,7 @@
 
 	let isMenuOpen = $state(false);
 	let activeCategory = $state('starters');
-	let viewerImages = $state(null);
+	let viewerItems = $state(/** @type {Array<any> | null} */ (null));
 	let viewerStartIndex = $state(0);
 	let isUserClicking = $state(false); // Prevent observer from overriding manual clicks
 	/** @type {HTMLDivElement | null} */
@@ -61,13 +61,44 @@
 		return (/** @type {any} */ (menuItems))?.[categoryId] ?? [];
 	}
 
+	function menuItemsWithImages() {
+		/** @type {Array<{ key: string; name: string; desc: string; price: string; image: any; images: any[]; dietary?: string; categoryId: string; categoryLabel: string }>} */
+		const entries = [];
+
+		for (const category of menuCategories) {
+			const items = menuItemsFor(category.id);
+			for (const item of items) {
+				const itemImages = imagesFromMenuItem(item);
+				if (!itemImages.length) continue;
+
+				entries.push({
+					key: `${category.id}:${item.name}:${item.price}`,
+					name: item.name,
+					desc: item.desc,
+					price: item.price,
+					image: item.image ?? itemImages[0],
+					images: itemImages,
+					dietary: item.dietary,
+					categoryId: category.id,
+					categoryLabel: category.label
+				});
+			}
+		}
+
+		return entries;
+	}
+
 	/** @param {string} categoryId @param {any} item */
 	function openMenuImageViewer(categoryId, item) {
-		const itemImages = imagesFromMenuItem(item);
-		viewerImages = itemImages;
-		viewerStartIndex = 0;
+		const entries = menuItemsWithImages();
+		const itemKey = `${categoryId}:${item.name}:${item.price}`;
+		const startIndex = Math.max(entries.findIndex((entry) => entry.key === itemKey), 0);
+
+		viewerItems = entries;
+		viewerStartIndex = startIndex;
 	}
 	
+	/** @param {any} item */
 	function handleAddItem(item) {
 		if (orderBagRef) {
 			orderBagRef.addToCart({
@@ -106,29 +137,78 @@
 	//menu imports
 	
 	import ir_orderbag from '$lib/assets/ir-shopping-bag.png?enhanced';
-	import baklava from '$lib/assets/images/menu/baklava-1.jpeg?enhanced';
 
-	//Covers change this to enhance, gallery images to enhanced imports and in img
-	import cover_adana_kebab from '$lib/assets/images/menu/cover/cover-adana-kebab.jpeg?enhanced';
-	import cover_mix_kebab from '$lib/assets/images/menu/cover/cover-mix-kebab.jpeg?enhanced';
-	import cover_beyti_sarma from '$lib/assets/images/menu/cover/cover-beyti-sarma.jpeg?enhanced';
-	import cover_kasarli_kofte from '$lib/assets/images/menu/cover/cover-kasarli-kofte.jpeg?enhanced';
-	import cover_kebab_beringela_1 from '$lib/assets/images/menu/cover/cover-kebab-beringela-1.jpeg?enhanced';
-	import cover_lamb_steak from '$lib/assets/images/menu/cover/cover-lamb-steak.jpeg?enhanced';
-	import cover_lulas_grelhadas from '$lib/assets/images/menu/cover/cover-lulas-grelhadas.jpeg?enhanced';
-	import cover_prato_familiar_mariscos from '$lib/assets/images/menu/cover/cover-prato-familiar-mariscos.jpeg?enhanced';
-	import cover_schnitzel from '$lib/assets/images/menu/cover/cover-schnitzel.jpeg?enhanced';
-
-	//images for imageViewer
-	import mix_kebab from '$lib/assets/images/menu/mix-kebab.jpeg?enhanced';
-	import adana_kebab from '$lib/assets/images/menu/adana-kebab.jpeg?enhanced';
-	import beyti_sarma from '$lib/assets/images/menu/beyti-sarma.jpeg?enhanced';
-	import kasarli_kofte from '$lib/assets/images/menu/kasarli-kofte.jpeg?enhanced';
-	import kebab_beringela_1 from '$lib/assets/images/menu/kebab-beringela-1.jpeg?enhanced';
-	import lamb_steak from '$lib/assets/images/menu/lamb-steak.jpeg?enhanced';
-	import lulas_grelhadas from '$lib/assets/images/menu/lulas-grelhadas.jpeg?enhanced';
-	import prato_familiar_mariscos from '$lib/assets/images/menu/prato-familiar-mariscos.jpeg?enhanced';
+	// Non-cover fallback image used where a compressed equivalent was not provided.
 	import schnitzel from '$lib/assets/images/menu/schnitzel.jpeg?enhanced';
+
+	//new menu images
+	import dish_2_pizza_quatroestacoes_53_scaled from '$lib/assets/images/menu/original-menu/compressed/2_Pizza_QuatroEstacoes_53-scaled.jpg?enhanced';
+	import dish_adana_ve_cop_sis from '$lib/assets/images/menu/original-menu/compressed/Adana ve Çöp Şiş.jpg?enhanced';
+	import dish_ali_nazik from '$lib/assets/images/menu/original-menu/compressed/Ali Nazik.jpg?enhanced';
+	import dish_authentic_italian_pasta from '$lib/assets/images/menu/original-menu/compressed/authentic-italian-pasta.jpg?enhanced';
+
+
+	import dish_bife_com_cogumelos2 from '$lib/assets/images/menu/original-menu/compressed/bife com cogumelos2.jpg?enhanced';
+	import dish_camaro_medio from '$lib/assets/images/menu/original-menu/compressed/camaro medio.jpg?enhanced';
+	import dish_cataplana_mariscos from '$lib/assets/images/menu/original-menu/compressed/cataplana mariscos.jpg?enhanced';
+	import dish_cop_yiy_durum from '$lib/assets/images/menu/original-menu/compressed/cop_YiY_durum.jpg?enhanced';
+	import dish_dallas_steak from '$lib/assets/images/menu/original-menu/compressed/Dallas Steak.jpg?enhanced';
+	import dish_domatesli_kebap from '$lib/assets/images/menu/original-menu/compressed/Domatesli Kebap.jpg?enhanced';
+	import dish_dsc_1445 from '$lib/assets/images/menu/original-menu/compressed/DSC_1445.jpg?enhanced';
+	import dish_dsc_3869 from '$lib/assets/images/menu/original-menu/compressed/DSC_3869.jpg?enhanced';
+	import dish_durum_urfa_400x270 from '$lib/assets/images/menu/original-menu/compressed/durum_urfa-400x270.jpg?enhanced';
+	import dish_escalada from '$lib/assets/images/menu/original-menu/compressed/escalada.jpg?enhanced';
+	import dish_etli_fajita_2 from '$lib/assets/images/menu/original-menu/compressed/etli_fajita_2.jpg?enhanced';
+	import dish_fft99_mf9448606 from '$lib/assets/images/menu/original-menu/compressed/fft99_mf9448606.jpeg?enhanced';
+	import dish_filete_de_pexie from '$lib/assets/images/menu/original-menu/compressed/filete de pexie.jpg?enhanced';
+	import dish_fillet_sultani from '$lib/assets/images/menu/original-menu/compressed/fillet sultani.jpeg?enhanced';
+	import dish_fried_piece_steak_plate from '$lib/assets/images/menu/original-menu/compressed/fried-piece-steak-plate.jpg?enhanced';
+	import dish_garoupa_grelhada from '$lib/assets/images/menu/original-menu/compressed/garoupa grelhada.jpg?enhanced';
+	import dish_guvec from '$lib/assets/images/menu/original-menu/compressed/guvec.jpg?enhanced';
+	import dish_high_angle_delicious_pasta_plain_background from '$lib/assets/images/menu/original-menu/compressed/high-angle-delicious-pasta-plain-background.jpg?enhanced';
+	import dish_img_4023 from '$lib/assets/images/menu/original-menu/compressed/IMG-4023.jpg?enhanced';
+	import dish_img_4269 from '$lib/assets/images/menu/original-menu/compressed/IMG-4269.jpg?enhanced';
+	import dish_kusleme from '$lib/assets/images/menu/original-menu/compressed/küşleme.jpg?enhanced';
+	import dish_kuzu_gerdan_2 from '$lib/assets/images/menu/original-menu/compressed/kuzu-gerdan.jpg?enhanced';
+	import dish_kuzu_kaburga14_e7098a05_952e_4860_939f_f4f4c87b346d_e1612204165148 from '$lib/assets/images/menu/original-menu/compressed/kuzu-kaburga14-e7098a05-952e-4860-939f-f4f4c87b346d-e1612204165148.jpg?enhanced';
+	import dish_lamb_steak from '$lib/assets/images/menu/original-menu/compressed/lamb steak.jpg?enhanced';
+	import dish_lokum_de_light from '$lib/assets/images/menu/original-menu/compressed/lokum de light.jpg?enhanced';
+	import dish_lulas from '$lib/assets/images/menu/original-menu/compressed/lulas.jpg?enhanced';
+	import dish_lumbo from '$lib/assets/images/menu/original-menu/compressed/lumbo.jpg?enhanced';
+	import dish_main_header_6_min_fotor_2023070112714_min_1 from '$lib/assets/images/menu/original-menu/compressed/main-header-6-min-fotor-2023070112714-min-1.jpg?enhanced';
+	import dish_mango_madness_2_scaled from '$lib/assets/images/menu/original-menu/compressed/Mango-Madness-2-scaled.jpg?enhanced';
+	import dish_new_york from '$lib/assets/images/menu/original-menu/compressed/New York.jpg?enhanced';
+	import dish_peixe from '$lib/assets/images/menu/original-menu/compressed/peixe.jpg?enhanced';
+	import dish_penne_pasta_tomato_sauce_with_chicken_tomatoes_wooden_table from '$lib/assets/images/menu/original-menu/compressed/penne-pasta-tomato-sauce-with-chicken-tomatoes-wooden-table.jpg?enhanced';
+	import dish_pg_margherita_pizza_1611491820 from '$lib/assets/images/menu/original-menu/compressed/pg-margherita-pizza-1611491820.jpg?enhanced';
+	import dish_picanha_2 from '$lib/assets/images/menu/original-menu/compressed/picanha (2).jpg?enhanced';
+	import dish_picanha_breasileira from '$lib/assets/images/menu/original-menu/compressed/picanha breasileira.jpg?enhanced';
+	import dish_pictures_set_2_0034_35 from '$lib/assets/images/menu/original-menu/compressed/Pictures Set 2_0034_35.jpg?enhanced';
+	import dish_pizza_familiar from '$lib/assets/images/menu/original-menu/compressed/pizza familiar.jpg?enhanced';
+	import dish_pizza_with_shrimp_salmonnd_olives from '$lib/assets/images/menu/original-menu/compressed/pizza-with-shrimp-salmonnd-olives.jpg?enhanced';
+	import dish_prato from '$lib/assets/images/menu/original-menu/compressed/prato.jpg?enhanced';
+	import dish_prego_no_prato_2 from '$lib/assets/images/menu/original-menu/compressed/Prego no prato 2.jpg?enhanced';
+	import dish_reggina from '$lib/assets/images/menu/original-menu/compressed/reggina.jpeg?enhanced';
+	import dish_saray_kasarli_kofte_6_adet_1e46_4 from '$lib/assets/images/menu/original-menu/compressed/saray-kasarli-kofte-6-adet-1e46-4.jpg?enhanced';
+	import dish_side_view_pizza_with_chicken_mushrooms_served_with_sauce_vegetables_salad_wooden_plate from '$lib/assets/images/menu/original-menu/compressed/side-view-pizza-with-chicken-mushrooms-served-with-sauce-vegetables-salad-wooden-plate.jpg?enhanced';
+	import dish_steak_istanbul from '$lib/assets/images/menu/original-menu/compressed/steak istanbul.jpg?enhanced';
+	import dish_strplion from '$lib/assets/images/menu/original-menu/compressed/strplion.jpg?enhanced';
+	import dish_tam_olculu_hunkar_begendi_tarifi from '$lib/assets/images/menu/original-menu/compressed/tam-olculu-hunkar-begendi-tarifi.jpg?enhanced';
+	import dish_tavuk_ve_cop_sis from '$lib/assets/images/menu/original-menu/compressed/Tavuk ve Çöp Şiş.jpg?enhanced';
+	import dish_tavuklu from '$lib/assets/images/menu/original-menu/compressed/tavuklu.jpg?enhanced';
+	import dish_t_bone from '$lib/assets/images/menu/original-menu/compressed/t-bone.jpg?enhanced';
+	import dish_tlg_1627 from '$lib/assets/images/menu/original-menu/compressed/TLG_1627.jpg?enhanced';
+	import dish_tlg_1629 from '$lib/assets/images/menu/original-menu/compressed/TLG_1629.jpg?enhanced';
+	import dish_tlg_1633 from '$lib/assets/images/menu/original-menu/compressed/TLG_1633.jpg?enhanced';
+	import dish_tlg_1698 from '$lib/assets/images/menu/original-menu/compressed/TLG_1698.jpg?enhanced';
+	import dish_tlg_1704 from '$lib/assets/images/menu/original-menu/compressed/TLG_1704.jpg?enhanced';
+	import dish_tlg_1709 from '$lib/assets/images/menu/original-menu/compressed/TLG_1709.jpg?enhanced';
+	import dish_tlg_1728 from '$lib/assets/images/menu/original-menu/compressed/TLG_1728.jpg?enhanced';
+	import dish_tomahawk from '$lib/assets/images/menu/original-menu/compressed/tomahawk.jpg?enhanced';
+	import dish_traditional_supreme_pizza_black_stone from '$lib/assets/images/menu/original-menu/compressed/traditional-supreme-pizza-black-stone.jpg?enhanced';
+	import dish_tuna_pizza_tomato_capers_cheese_onion_olives_top_view from '$lib/assets/images/menu/original-menu/compressed/tuna-pizza-tomato-capers-cheese-onion-olives-top-view.jpg?enhanced';
+
+	import dish_hasirli_kebap_resmi from '$lib/assets/images/menu/original-menu/compressed/hasırlı kebap resmi.jpg?enhanced';
 
 
 	//header
@@ -213,75 +293,75 @@
 			{ name: m.item_chicken_doner_plate(), desc: m.desc_chicken_doner_plate(), price: "850" },
 			{ name: m.item_chicken_shawarma(), desc: m.desc_chicken_shawarma(), price: "550" },
 			{ name: m.item_chicken_breast(), desc: m.desc_chicken_breast(), price: "700" },
-			{ name: m.item_schnitzel(), desc: m.desc_schnitzel(), price: "800", image: cover_schnitzel, images: [schnitzel] }
+			{ name: m.item_schnitzel(), desc: m.desc_schnitzel(), price: "800", image: schnitzel, images: [schnitzel] }
 		],
 		kebab: [
-			{ name: m.item_adana_spicy(), desc: m.desc_adana_spicy(), price: "900", image: cover_adana_kebab, images: [adana_kebab] },
-			{ name: m.item_pistachio_kebab(), desc: m.desc_pistachio_kebab(), price: "1200" },
+			{ name: m.item_adana_spicy(), desc: m.desc_adana_spicy(), price: "900", image: dish_tlg_1698, images: [dish_tlg_1698] },
+			{ name: m.item_pistachio_kebab(), desc: m.desc_pistachio_kebab(), price: "1200", image: dish_tlg_1704, images: [dish_tlg_1704] },
 			{ name: m.item_urfa_nonspicy(), desc: m.desc_urfa_nonspicy(), price: "900" },
 			{ name: m.item_adana_wrap(), desc: m.desc_adana_wrap(), price: "550" },
-			{ name: m.item_urfa_wrap(), desc: m.desc_urfa_wrap(), price: "550" },
-			{ name: m.item_grilled_wings(), desc: m.desc_grilled_wings(), price: "1000" },
-			{ name: m.item_chicken_kebab(), desc: m.desc_chicken_kebab(), price: "800" },
-			{ name: m.item_lamb_skewered(), desc: m.desc_lamb_skewered(), price: "1050" },
-			{ name: m.item_cop_sis(), desc: m.desc_cop_sis(), price: "1050" },
-			{ name: m.item_cop_sis_durum(), desc: m.desc_cop_sis_durum(), price: "700" },
-			{ name: m.item_mix_kebab_1(), desc: m.desc_mix_kebab_1(), price: "1500", image: cover_mix_kebab, images: [mix_kebab] },
+			{ name: m.item_urfa_wrap(), desc: m.desc_urfa_wrap(), price: "550", image: dish_durum_urfa_400x270, images: [dish_durum_urfa_400x270] },
+			{ name: m.item_grilled_wings(), desc: m.desc_grilled_wings(), price: "1000", image: dish_tlg_1633, images: [dish_tlg_1633] },
+			{ name: m.item_chicken_kebab(), desc: m.desc_chicken_kebab(), price: "800", image: dish_tlg_1709, images: [dish_tlg_1709] },
+			{ name: m.item_lamb_skewered(), desc: m.desc_lamb_skewered(), price: "1050", image: dish_tlg_1629, images: [dish_tlg_1629] },
+			{ name: m.item_cop_sis(), desc: m.desc_cop_sis(), price: "1050", image: dish_tlg_1627, images: [dish_tlg_1627] },
+			{ name: m.item_cop_sis_durum(), desc: m.desc_cop_sis_durum(), price: "700", image: dish_cop_yiy_durum, images: [dish_cop_yiy_durum] },
+			{ name: m.item_mix_kebab_1(), desc: m.desc_mix_kebab_1(), price: "1500", image: dish_adana_ve_cop_sis, images: [dish_adana_ve_cop_sis] },
 			{ name: m.item_mix_kebab_2(), desc: m.desc_mix_kebab_2(), price: "2700" },
 			{ name: m.item_mix_kebab_4(), desc: m.desc_mix_kebab_4(), price: "5000" },
 			{ name: m.item_mix_kebab_6(), desc: m.desc_mix_kebab_6(), price: "7200" },
 			{ name: m.item_grilled_meatballs(), desc: m.desc_grilled_meatballs(), price: "950" },
-			{ name: m.item_kasarli_kofte(), desc: m.desc_kasarli_kofte(), price: "1200", image: cover_kasarli_kofte, images: [kasarli_kofte] },
-			{ name: m.item_chicken_cop_sis(), desc: m.desc_chicken_cop_sis(), price: "1200" },
-			{ name: m.item_adana_cop_sis(), desc: m.desc_adana_cop_sis(), price: "1200" },
-			{ name: m.item_ali_nazik(), desc: m.desc_ali_nazik(), price: "1200" }
+			{ name: m.item_kasarli_kofte(), desc: m.desc_kasarli_kofte(), price: "1200", image: dish_saray_kasarli_kofte_6_adet_1e46_4, images: [dish_saray_kasarli_kofte_6_adet_1e46_4] },
+			{ name: m.item_chicken_cop_sis(), desc: m.desc_chicken_cop_sis(), price: "1200", image: dish_tavuk_ve_cop_sis, images: [dish_tavuk_ve_cop_sis] },
+			{ name: m.item_adana_cop_sis(), desc: m.desc_adana_cop_sis(), price: "1200", image: dish_adana_ve_cop_sis, images: [dish_adana_ve_cop_sis] },
+			{ name: m.item_ali_nazik(), desc: m.desc_ali_nazik(), price: "1200", image: dish_ali_nazik, images: [dish_ali_nazik] }
 		],
 		special: [
-			{ name: m.item_patlicanli_kebap(), desc: m.desc_patlicanli_kebap(), price: "1200", image: cover_kebab_beringela_1, images: [kebab_beringela_1] },
-			{ name: m.item_domatesli_kebap(), desc: m.desc_domatesli_kebap(), price: "1200" },
-			{ name: m.item_beyti_sarma(), desc: m.desc_beyti_sarma(), price: "1500", image: cover_beyti_sarma, images: [beyti_sarma] },
-			{ name: m.item_kusbasi_guvec(), desc: m.desc_kusbasi_guvec(), price: "1300" },
-			{ name: m.item_kebap_soltani(), desc: m.desc_kebap_soltani(), price: "1100" },
-			{ name: m.item_filet_sultani(), desc: m.desc_filet_sultani(), price: "1000" },
-			{ name: m.item_sac_kavurma_1(), desc: m.desc_sac_kavurma_1(), price: "1200" },
+			{ name: m.item_patlicanli_kebap(), desc: m.desc_patlicanli_kebap(), price: "1200", image: dish_hasirli_kebap_resmi, images: [dish_hasirli_kebap_resmi] },
+			{ name: m.item_domatesli_kebap(), desc: m.desc_domatesli_kebap(), price: "1200", image: dish_domatesli_kebap, images: [dish_domatesli_kebap] },
+			{ name: m.item_beyti_sarma(), desc: m.desc_beyti_sarma(), price: "1500", image: dish_img_4023, images: [dish_img_4023] },
+			{ name: m.item_kusbasi_guvec(), desc: m.desc_kusbasi_guvec(), price: "1300", image: dish_guvec, images: [dish_guvec] },
+			{ name: m.item_kebap_soltani(), desc: m.desc_kebap_soltani(), price: "1100", image: dish_pictures_set_2_0034_35, images: [dish_pictures_set_2_0034_35] },
+			{ name: m.item_filet_sultani(), desc: m.desc_filet_sultani(), price: "1000", image: dish_fillet_sultani, images: [dish_fillet_sultani] },
+			{ name: m.item_sac_kavurma_1(), desc: m.desc_sac_kavurma_1(), price: "1200", image: dish_dsc_3869, images: [dish_dsc_3869] },
 			{ name: m.item_sac_kavurma_2(), desc: m.desc_sac_kavurma_2(), price: "2000" },
-			{ name: m.item_prego_plate(), desc: m.desc_prego_plate(), price: "1100" },
-			{ name: m.item_kusleme(), desc: m.desc_kusleme(), price: "1750" },
+			{ name: m.item_prego_plate(), desc: m.desc_prego_plate(), price: "1100", image: dish_prego_no_prato_2, images: [dish_prego_no_prato_2] },
+			{ name: m.item_kusleme(), desc: m.desc_kusleme(), price: "1750", image: dish_kusleme, images: [dish_kusleme] },
 			{ name: m.item_fes_kebab(), desc: m.desc_fes_kebab(), price: "2100" },
-			{ name: m.item_black_pepper_steak(), desc: m.desc_black_pepper_steak(), price: "1700" },
-			{ name: m.item_hunkar_begendi(), desc: m.desc_hunkar_begendi(), price: "1800" },
-			{ name: m.item_roasted_steak(), desc: m.desc_roasted_steak(), price: "1700" },
-			{ name: m.item_fajita_beef(), desc: m.desc_fajita_beef(), price: "1400" },
+			{ name: m.item_black_pepper_steak(), desc: m.desc_black_pepper_steak(), price: "1700", image: dish_main_header_6_min_fotor_2023070112714_min_1, images: [dish_main_header_6_min_fotor_2023070112714_min_1] },
+			{ name: m.item_hunkar_begendi(), desc: m.desc_hunkar_begendi(), price: "1800", image: dish_tam_olculu_hunkar_begendi_tarifi, images: [dish_tam_olculu_hunkar_begendi_tarifi] },
+			{ name: m.item_roasted_steak(), desc: m.desc_roasted_steak(), price: "1700", image: dish_fried_piece_steak_plate, images: [dish_fried_piece_steak_plate] },
+			{ name: m.item_fajita_beef(), desc: m.desc_fajita_beef(), price: "1400", image: dish_etli_fajita_2, images: [dish_etli_fajita_2] },
 			{ name: m.item_fajita_chicken(), desc: m.desc_fajita_chicken(), price: "1200" },
 			{ name: m.item_fajita_shrimp(), desc: m.desc_fajita_shrimp(), price: "1500" },
-			{ name: m.item_steak_mushrooms(), desc: m.desc_steak_mushrooms(), price: "1700" },
-			{ name: m.item_istanbul_sarma(), desc: m.desc_istanbul_sarma(), price: "2000" },
-			{ name: m.item_picanha(), desc: m.desc_picanha(), price: "1550" },
-			{ name: m.item_picanha_brazilian(), desc: m.desc_picanha_brazilian(), price: "1850" }
+			{ name: m.item_steak_mushrooms(), desc: m.desc_steak_mushrooms(), price: "1700", image: dish_bife_com_cogumelos2, images: [dish_bife_com_cogumelos2] },
+			{ name: m.item_istanbul_sarma(), desc: m.desc_istanbul_sarma(), price: "2000", image: dish_img_4269, images: [dish_img_4269] },
+			{ name: m.item_picanha(), desc: m.desc_picanha(), price: "1550", image: dish_picanha_2, images: [dish_picanha_2] },
+			{ name: m.item_picanha_brazilian(), desc: m.desc_picanha_brazilian(), price: "1850", image: dish_picanha_breasileira, images: [dish_picanha_breasileira] }
 		],
 		steakhouse: [
-			{ name: m.item_istanbul_steak(), desc: m.desc_istanbul_steak(), price: "1800" },
+			{ name: m.item_istanbul_steak(), desc: m.desc_istanbul_steak(), price: "1800", image: dish_steak_istanbul, images: [dish_steak_istanbul] },
 			{ name: m.item_veal_steak(), desc: m.desc_veal_steak(), price: "1600" },
-			{ name: m.item_tbone(), desc: m.desc_tbone(), price: "1650" },
-			{ name: m.item_dallas_steak(), desc: m.desc_dallas_steak(), price: "1700" },
-			{ name: m.item_lokum_delight(), desc: m.desc_lokum_delight(), price: "1900" },
-			{ name: m.item_striploin(), desc: m.desc_striploin(), price: "1600" },
-			{ name: m.item_tomahawk(), desc: m.desc_tomahawk(), price: "2200" },
-			{ name: m.item_ny_strip(), desc: m.desc_ny_strip(), price: "1800" },
-			{ name: m.item_lamb_rice(), desc: m.desc_lamb_rice(), price: "1750" },
-			{ name: m.item_lamb_steak(), desc: m.desc_lamb_steak(), price: "1900", image: cover_lamb_steak, images: [lamb_steak] },
-			{ name: m.item_loin(), desc: m.desc_loin(), price: "1700" },
+			{ name: m.item_tbone(), desc: m.desc_tbone(), price: "1650", image: dish_t_bone, images: [dish_t_bone] },
+			{ name: m.item_dallas_steak(), desc: m.desc_dallas_steak(), price: "1700", image: dish_dallas_steak, images: [dish_dallas_steak] },
+			{ name: m.item_lokum_delight(), desc: m.desc_lokum_delight(), price: "1900", image: dish_lokum_de_light, images: [dish_lokum_de_light] },
+			{ name: m.item_striploin(), desc: m.desc_striploin(), price: "1600", image: dish_strplion, images: [dish_strplion] },
+			{ name: m.item_tomahawk(), desc: m.desc_tomahawk(), price: "2200", image: dish_tomahawk, images: [dish_tomahawk] },
+			{ name: m.item_ny_strip(), desc: m.desc_ny_strip(), price: "1800", image: dish_new_york, images: [dish_new_york] },
+			{ name: m.item_lamb_rice(), desc: m.desc_lamb_rice(), price: "1750", image: dish_tavuklu, images: [dish_tavuklu] },
+			{ name: m.item_lamb_steak(), desc: m.desc_lamb_steak(), price: "1900", image: dish_lamb_steak, images: [dish_lamb_steak] },
+			{ name: m.item_loin(), desc: m.desc_loin(), price: "1700", image: dish_lumbo, images: [dish_lumbo] },
 			{ name: m.item_lamb_curry(), desc: m.desc_lamb_curry(), price: "1600" },
-			{ name: m.item_lamb_chops(), desc: m.desc_lamb_chops(), price: "1800" },
-			{ name: m.item_lamb_ribs(), desc: m.desc_lamb_ribs(), price: "1600" },
-			{ name: m.item_lamb_skewer_steak(), desc: m.desc_lamb_skewer_steak(), price: "1600" }
+			{ name: m.item_lamb_chops(), desc: m.desc_lamb_chops(), price: "1800", image: dish_tlg_1728, images: [dish_tlg_1728] },
+			{ name: m.item_lamb_ribs(), desc: m.desc_lamb_ribs(), price: "1600", image: dish_kuzu_kaburga14_e7098a05_952e_4860_939f_f4f4c87b346d_e1612204165148, images: [dish_kuzu_kaburga14_e7098a05_952e_4860_939f_f4f4c87b346d_e1612204165148] },
+			{ name: m.item_lamb_skewer_steak(), desc: m.desc_lamb_skewer_steak(), price: "1600", image: dish_kuzu_gerdan_2, images: [dish_kuzu_gerdan_2] }
 		],
 		pasta: [
-			{ name: m.item_penne_arrabiata(), desc: m.desc_penne_arrabiata(), price: "800" },
+			{ name: m.item_penne_arrabiata(), desc: m.desc_penne_arrabiata(), price: "800", image: dish_penne_pasta_tomato_sauce_with_chicken_tomatoes_wooden_table, images: [dish_penne_pasta_tomato_sauce_with_chicken_tomatoes_wooden_table] },
 			{ name: m.item_spaghetti_carbonara(), desc: m.desc_spaghetti_carbonara(), price: "850" },
 			{ name: m.item_linguine_di_mare(), desc: m.desc_linguine_di_mare(), price: "900" },
-			{ name: m.item_fettuccine_alfredo(), desc: m.desc_fettuccine_alfredo(), price: "900" },
-			{ name: m.item_spaghetti_basilico(), desc: m.desc_spaghetti_basilico(), price: "800" }
+			{ name: m.item_fettuccine_alfredo(), desc: m.desc_fettuccine_alfredo(), price: "900", image: dish_high_angle_delicious_pasta_plain_background, images: [dish_high_angle_delicious_pasta_plain_background] },
+			{ name: m.item_spaghetti_basilico(), desc: m.desc_spaghetti_basilico(), price: "800", image: dish_authentic_italian_pasta, images: [dish_authentic_italian_pasta] }
 		],
 		pide: [
 			{ name: m.item_mixed_pide(), desc: m.desc_mixed_pide(), price: "1200" },
@@ -295,21 +375,21 @@
 			{ name: m.item_pide_small(), desc: m.desc_pide_small(), price: "700" }
 		],
 		pizza: [
-			{ name: m.item_pizza_chicken_s(), desc: m.desc_pizza_chicken_s(), price: "800" },
-			{ name: m.item_pizza_chicken_m(), desc: m.desc_pizza_chicken_m(), price: "1200" },
-			{ name: m.item_pizza_mexicana_s(), desc: m.desc_pizza_mexicana_s(), price: "800" },
-			{ name: m.item_pizza_mexicana_m(), desc: m.desc_pizza_mexicana_m(), price: "1200" },
-			{ name: m.item_pizza_margarita_s(), desc: m.desc_pizza_margarita_s(), price: "600" },
-			{ name: m.item_pizza_margarita_m(), desc: m.desc_pizza_margarita_m(), price: "1000" },
-			{ name: m.item_pizza_tuna_s(), desc: m.desc_pizza_tuna_s(), price: "800" },
-			{ name: m.item_pizza_tuna_m(), desc: m.desc_pizza_tuna_m(), price: "1200" },
-			{ name: m.item_pizza_family(), desc: m.desc_pizza_family(), price: "1600" },
-			{ name: m.item_pizza_shrimp_s(), desc: m.desc_pizza_shrimp_s(), price: "750" },
-			{ name: m.item_pizza_shrimp_m(), desc: m.desc_pizza_shrimp_m(), price: "1150" },
-			{ name: m.item_pizza_regina_s(), desc: m.desc_pizza_regina_s(), price: "750" },
-			{ name: m.item_pizza_regina_m(), desc: m.desc_pizza_regina_m(), price: "1150" },
-			{ name: m.item_pizza_mix_s(), desc: m.desc_pizza_mix_s(), price: "850" },
-			{ name: m.item_pizza_mix_m(), desc: m.desc_pizza_mix_m(), price: "1250" },
+			{ name: m.item_pizza_chicken_s(), desc: m.desc_pizza_chicken_s(), price: "800", image: dish_side_view_pizza_with_chicken_mushrooms_served_with_sauce_vegetables_salad_wooden_plate, images: [dish_side_view_pizza_with_chicken_mushrooms_served_with_sauce_vegetables_salad_wooden_plate] },
+			{ name: m.item_pizza_chicken_m(), desc: m.desc_pizza_chicken_m(), price: "1200", image: dish_side_view_pizza_with_chicken_mushrooms_served_with_sauce_vegetables_salad_wooden_plate, images: [dish_side_view_pizza_with_chicken_mushrooms_served_with_sauce_vegetables_salad_wooden_plate] },
+			{ name: m.item_pizza_mexicana_s(), desc: m.desc_pizza_mexicana_s(), price: "800", image: dish_traditional_supreme_pizza_black_stone, images: [dish_traditional_supreme_pizza_black_stone] },
+			{ name: m.item_pizza_mexicana_m(), desc: m.desc_pizza_mexicana_m(), price: "1200", image: dish_traditional_supreme_pizza_black_stone, images: [dish_traditional_supreme_pizza_black_stone] },
+			{ name: m.item_pizza_margarita_s(), desc: m.desc_pizza_margarita_s(), price: "600", image: dish_pg_margherita_pizza_1611491820, images: [dish_pg_margherita_pizza_1611491820] },
+			{ name: m.item_pizza_margarita_m(), desc: m.desc_pizza_margarita_m(), price: "1000", image: dish_pg_margherita_pizza_1611491820, images: [dish_pg_margherita_pizza_1611491820] },
+			{ name: m.item_pizza_tuna_s(), desc: m.desc_pizza_tuna_s(), price: "800", image: dish_tuna_pizza_tomato_capers_cheese_onion_olives_top_view, images: [dish_tuna_pizza_tomato_capers_cheese_onion_olives_top_view] },
+			{ name: m.item_pizza_tuna_m(), desc: m.desc_pizza_tuna_m(), price: "1200", image: dish_tuna_pizza_tomato_capers_cheese_onion_olives_top_view, images: [dish_tuna_pizza_tomato_capers_cheese_onion_olives_top_view] },
+			{ name: m.item_pizza_family(), desc: m.desc_pizza_family(), price: "1600", image: dish_pizza_familiar, images: [dish_pizza_familiar] },
+			{ name: m.item_pizza_shrimp_s(), desc: m.desc_pizza_shrimp_s(), price: "750", image: dish_pizza_with_shrimp_salmonnd_olives, images: [dish_pizza_with_shrimp_salmonnd_olives] },
+			{ name: m.item_pizza_shrimp_m(), desc: m.desc_pizza_shrimp_m(), price: "1150", image: dish_pizza_with_shrimp_salmonnd_olives, images: [dish_pizza_with_shrimp_salmonnd_olives] },
+			{ name: m.item_pizza_regina_s(), desc: m.desc_pizza_regina_s(), price: "750", image: dish_reggina, images: [dish_reggina] },
+			{ name: m.item_pizza_regina_m(), desc: m.desc_pizza_regina_m(), price: "1150", image: dish_reggina, images: [dish_reggina] },
+			{ name: m.item_pizza_mix_s(), desc: m.desc_pizza_mix_s(), price: "850", image: dish_2_pizza_quatroestacoes_53_scaled, images: [dish_2_pizza_quatroestacoes_53_scaled] },
+			{ name: m.item_pizza_mix_m(), desc: m.desc_pizza_mix_m(), price: "1250", image: dish_2_pizza_quatroestacoes_53_scaled, images: [dish_2_pizza_quatroestacoes_53_scaled] },
 			{ name: m.item_pizza_turkish_s(), desc: m.desc_pizza_turkish_s(), price: "800" },
 			{ name: m.item_pizza_turkish_m(), desc: m.desc_pizza_turkish_m(), price: "1200" }
 		],
@@ -348,15 +428,15 @@
 			{ name: m.item_turkish_sushi_shawarma(), desc: m.desc_turkish_sushi_shawarma(), price: "350" }
 		],
 		seafood: [
-			{ name: m.item_grilled_grouper(), desc: m.desc_grilled_grouper(), price: "1800" },
-			{ name: m.item_grilled_shrimp(), desc: m.desc_grilled_shrimp(), price: "1800" },
-			{ name: m.item_grilled_red_fish(), desc: m.desc_grilled_red_fish(), price: "1600" },
-			{ name: m.item_seafood_family(), desc: m.desc_seafood_family(), price: "5000", image: cover_prato_familiar_mariscos, images: [prato_familiar_mariscos] },
-			{ name: m.item_grilled_squid(), desc: m.desc_grilled_squid(), price: "1700", image: cover_lulas_grelhadas, images: [lulas_grelhadas] },
-			{ name: m.item_fish_fillet(), desc: m.desc_fish_fillet(), price: "1800" },
-			{ name: m.item_cataplana_1(), desc: m.desc_cataplana_1(), price: "1800" },
-			{ name: m.item_cataplana_2(), desc: m.desc_cataplana_2(), price: "2800" },
-			{ name: m.item_scaled_grouper(), desc: m.desc_scaled_grouper(), price: "1800" }
+			{ name: m.item_grilled_grouper(), desc: m.desc_grilled_grouper(), price: "1800", image: dish_garoupa_grelhada, images: [dish_garoupa_grelhada] },
+			{ name: m.item_grilled_shrimp(), desc: m.desc_grilled_shrimp(), price: "1800", image: dish_camaro_medio, images: [dish_camaro_medio] },
+			{ name: m.item_grilled_red_fish(), desc: m.desc_grilled_red_fish(), price: "1600", image: dish_peixe, images: [dish_peixe] },
+			{ name: m.item_seafood_family(), desc: m.desc_seafood_family(), price: "5000", image: dish_prato, images: [dish_prato] },
+			{ name: m.item_grilled_squid(), desc: m.desc_grilled_squid(), price: "1700", image: dish_lulas, images: [dish_lulas] },
+			{ name: m.item_fish_fillet(), desc: m.desc_fish_fillet(), price: "1800", image: dish_filete_de_pexie, images: [dish_filete_de_pexie] },
+			{ name: m.item_cataplana_1(), desc: m.desc_cataplana_1(), price: "1800", image: dish_cataplana_mariscos, images: [dish_cataplana_mariscos] },
+			{ name: m.item_cataplana_2(), desc: m.desc_cataplana_2(), price: "2800", image: dish_cataplana_mariscos, images: [dish_cataplana_mariscos] },
+			{ name: m.item_scaled_grouper(), desc: m.desc_scaled_grouper(), price: "1800", image: dish_escalada, images: [dish_escalada] }
 		],
 		vegetable: [
 			{ name: m.item_veg_lasagna(), desc: m.desc_veg_lasagna(), price: "800" },
@@ -377,8 +457,8 @@
 		drinks: [
 			{ name: m.item_water_l(), desc: m.desc_water_l(), price: "150" },
 			{ name: m.item_water_s(), desc: m.desc_water_s(), price: "80" },
-			{ name: m.item_ayran(), desc: m.desc_ayran(), price: "150" },
-			{ name: m.item_lemonade(), desc: m.desc_lemonade(), price: "200" },
+			{ name: m.item_ayran(), desc: m.desc_ayran(), price: "150", image: dish_dsc_1445, images: [dish_dsc_1445] },
+			{ name: m.item_lemonade(), desc: m.desc_lemonade(), price: "200", image: dish_fft99_mf9448606, images: [dish_fft99_mf9448606] },
 			{ name: m.item_coca_cola(), desc: m.desc_coca_cola(), price: "100" },
 			{ name: m.item_coca_zero(), desc: m.desc_coca_zero(), price: "100" },
 			{ name: m.item_sprite(), desc: m.desc_sprite(), price: "100" },
@@ -428,7 +508,7 @@
 			{ name: m.item_juice_natural(), desc: m.desc_juice_natural(), price: "350" },
 			{ name: m.item_juice_mix(), desc: m.desc_juice_mix(), price: "400" },
 			{ name: m.item_juice_guava(), desc: m.desc_juice_guava(), price: "400" },
-			{ name: m.item_juice_mango(), desc: m.desc_juice_mango(), price: "400" },
+			{ name: m.item_juice_mango(), desc: m.desc_juice_mango(), price: "400", image: dish_mango_madness_2_scaled, images: [dish_mango_madness_2_scaled] },
 			{ name: m.item_juice_titama(), desc: m.desc_juice_titama(), price: "400" },
 			{ name: m.item_juice_tropical(), desc: m.desc_juice_tropical(), price: "400" },
 			{ name: m.item_juice_cordelia(), desc: m.desc_juice_cordelia(), price: "400" }
@@ -675,8 +755,20 @@
 </div>
 
 <!-- --- IMAGE MODAL (Moved outside main div) --- -->
-{#if viewerImages}
-	<ImageViewer images={viewerImages} initialIndex={viewerStartIndex} onClose={() => (viewerImages = null)} />
+{#if viewerItems}
+	<ImageViewer
+		items={viewerItems}
+		initialItemIndex={viewerStartIndex}
+		onAddToCart={handleAddItem}
+		labels={{
+			close: m.viewer_close(),
+			prevItem: m.viewer_prev_item(),
+			nextItem: m.viewer_next_item(),
+			addToCart: m.viewer_add_to_cart(),
+			itemLabel: m.viewer_item_label()
+		}}
+		onClose={() => (viewerItems = null)}
+	/>
 {/if}
 
 <style>

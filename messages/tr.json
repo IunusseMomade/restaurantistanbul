@@ -705,6 +705,11 @@
 	"bag_order_whatsapp": "WhatsApp ile Sipariş Ver",
 	"bag_wa_greeting": "Merhaba! Aşağıdaki siparişi vermek istiyorum:",
 	"bag_wa_total": "Toplam",
+	"viewer_close": "Kapat",
+	"viewer_prev_item": "Önceki ürün",
+	"viewer_next_item": "Sonraki ürün",
+	"viewer_add_to_cart": "Sepete ekle",
+	"viewer_item_label": "Ürün",
 	"footer_link_sitemap": "Site Haritası"
 
 }

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+>
+  <url>
+    <loc>https://restaurantistanbul.pages.dev/</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://restaurantistanbul.pages.dev/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://restaurantistanbul.pages.dev/en" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://restaurantistanbul.pages.dev/tr" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://restaurantistanbul.pages.dev/" />
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://restaurantistanbul.pages.dev/en</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://restaurantistanbul.pages.dev/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://restaurantistanbul.pages.dev/en" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://restaurantistanbul.pages.dev/tr" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://restaurantistanbul.pages.dev/" />
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://restaurantistanbul.pages.dev/tr</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://restaurantistanbul.pages.dev/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://restaurantistanbul.pages.dev/en" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://restaurantistanbul.pages.dev/tr" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://restaurantistanbul.pages.dev/" />
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://restaurantistanbul.pages.dev/sobre</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://restaurantistanbul.pages.dev/sobre" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://restaurantistanbul.pages.dev/en/about" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://restaurantistanbul.pages.dev/tr/hakkimizda" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://restaurantistanbul.pages.dev/sobre" />
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://restaurantistanbul.pages.dev/en/about</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://restaurantistanbul.pages.dev/sobre" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://restaurantistanbul.pages.dev/en/about" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://restaurantistanbul.pages.dev/tr/hakkimizda" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://restaurantistanbul.pages.dev/sobre" />
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://restaurantistanbul.pages.dev/tr/hakkimizda</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://restaurantistanbul.pages.dev/sobre" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://restaurantistanbul.pages.dev/en/about" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://restaurantistanbul.pages.dev/tr/hakkimizda" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://restaurantistanbul.pages.dev/sobre" />
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://restaurantistanbul.pages.dev/contato</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://restaurantistanbul.pages.dev/contato" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://restaurantistanbul.pages.dev/en/contact" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://restaurantistanbul.pages.dev/tr/iletisim" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://restaurantistanbul.pages.dev/contato" />
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://restaurantistanbul.pages.dev/en/contact</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://restaurantistanbul.pages.dev/contato" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://restaurantistanbul.pages.dev/en/contact" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://restaurantistanbul.pages.dev/tr/iletisim" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://restaurantistanbul.pages.dev/contato" />
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://restaurantistanbul.pages.dev/tr/iletisim</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://restaurantistanbul.pages.dev/contato" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://restaurantistanbul.pages.dev/en/contact" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://restaurantistanbul.pages.dev/tr/iletisim" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://restaurantistanbul.pages.dev/contato" />
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://restaurantistanbul.pages.dev/localizacoes</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://restaurantistanbul.pages.dev/localizacoes" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://restaurantistanbul.pages.dev/en/locations" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://restaurantistanbul.pages.dev/tr/konumlar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://restaurantistanbul.pages.dev/localizacoes" />
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://restaurantistanbul.pages.dev/en/locations</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://restaurantistanbul.pages.dev/localizacoes" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://restaurantistanbul.pages.dev/en/locations" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://restaurantistanbul.pages.dev/tr/konumlar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://restaurantistanbul.pages.dev/localizacoes" />
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://restaurantistanbul.pages.dev/tr/konumlar</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://restaurantistanbul.pages.dev/localizacoes" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://restaurantistanbul.pages.dev/en/locations" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://restaurantistanbul.pages.dev/tr/konumlar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://restaurantistanbul.pages.dev/localizacoes" />
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://restaurantistanbul.pages.dev/menu</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://restaurantistanbul.pages.dev/menu" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://restaurantistanbul.pages.dev/en/menu" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://restaurantistanbul.pages.dev/tr/menu" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://restaurantistanbul.pages.dev/menu" />
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://restaurantistanbul.pages.dev/en/menu</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://restaurantistanbul.pages.dev/menu" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://restaurantistanbul.pages.dev/en/menu" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://restaurantistanbul.pages.dev/tr/menu" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://restaurantistanbul.pages.dev/menu" />
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://restaurantistanbul.pages.dev/tr/menu</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://restaurantistanbul.pages.dev/menu" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://restaurantistanbul.pages.dev/en/menu" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://restaurantistanbul.pages.dev/tr/menu" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://restaurantistanbul.pages.dev/menu" />
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>

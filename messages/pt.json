@@ -720,6 +720,11 @@
 	"bag_estimated_total": "Total Estimado",
 	"bag_order_whatsapp": "Pedir Agora via WhatsApp",
 	"bag_wa_greeting": "Olá! Gostaria de fazer o seguinte pedido:",
-	"bag_wa_total": "Total"
+	"bag_wa_total": "Total",
+	"viewer_close": "Fechar",
+	"viewer_prev_item": "Item anterior",
+	"viewer_next_item": "Próximo item",
+	"viewer_add_to_cart": "Adicionar ao cesto",
+	"viewer_item_label": "Item"
 
 }

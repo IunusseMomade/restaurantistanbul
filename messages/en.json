@@ -702,6 +702,11 @@
 	"bag_order_whatsapp": "Order Now via WhatsApp",
 	"bag_wa_greeting": "Hello! I would like to place the following order:",
 	"bag_wa_total": "Total",
+	"viewer_close": "Close",
+	"viewer_prev_item": "Previous item",
+	"viewer_next_item": "Next item",
+	"viewer_add_to_cart": "Add to cart",
+	"viewer_item_label": "Item",
 	"footer_link_sitemap": "Sitemap"
 
 }
