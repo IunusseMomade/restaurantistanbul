@@ -6,7 +6,7 @@
   // Props: phone number (WhatsApp) and enhanced image source for the bag
   let { phone = '258847131300', bagImage } = $props();
 
-  type MenuItem = { name: string; description?: string; price: string; image?: unknown };
+  type MenuItem = { name: string; description?: string; price: string; image?: string };
   type IncomingMenuItem = { name: unknown; description?: unknown; price: unknown; image?: unknown };
   type CartItem = MenuItem & { quantity: number };
   type PersistedCartItem = { name: string; description?: string; price: string; quantity: number };
@@ -85,11 +85,23 @@
     return cart.reduce((acc, item) => acc + item.quantity, 0);
   }
 
+  function imageToSrc(image: unknown): string | undefined {
+    if (typeof image === 'string') return image;
+    if (!image || typeof image !== 'object') return undefined;
+
+    const maybeEnhanced = image as { img?: { src?: unknown }; src?: unknown };
+    if (typeof maybeEnhanced.img?.src === 'string') return maybeEnhanced.img.src;
+    if (typeof maybeEnhanced.src === 'string') return maybeEnhanced.src;
+
+    return undefined;
+  }
+
   // Exposed API for parent: call via `bind:this` -> componentRef.addToCart(item)
   export function addToCart(item: IncomingMenuItem) {
     const normalizedName = String(item.name ?? '');
     const normalizedDescription = item.description == null ? undefined : String(item.description);
     const normalizedPrice = String(item.price ?? '0');
+    const normalizedImage = imageToSrc(item.image);
 
     const idx = cart.findIndex((i) => i.name === normalizedName);
     if (idx > -1) cart[idx].quantity += 1;
@@ -97,7 +109,7 @@
       name: normalizedName,
       description: normalizedDescription,
       price: normalizedPrice,
-      image: item.image,
+      image: normalizedImage,
       quantity: 1
     });
 
@@ -244,10 +256,10 @@
               <p class="text-xs text-gray-500 max-w-[200px]">{m.bag_empty_desc()}</p>
             </div>
           {:else}
-            {#each cart as item, i}
+            {#each cart as item, i (`${item.name}-${i}`)}
               <div class="flex gap-3 items-start p-3 bg-gray-50 rounded-xl">
                 {#if item.image}
-                  <enhanced:img src={item.image as never} alt={item.name} class="w-16 h-16 object-contain rounded bg-white" />
+                  <img src={item.image} alt={item.name} class="w-16 h-16 object-contain rounded bg-white" loading="lazy" decoding="async" />
                 {/if}
                 <div class="flex-1 min-w-0">
                   <div class="flex justify-between items-start mb-1">
