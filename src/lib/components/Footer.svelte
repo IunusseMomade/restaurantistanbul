@@ -73,6 +73,9 @@
 						<li class="cursor-pointer hover:text-primary">{m.footer_link_privacy()}</li>
 						<li class="cursor-pointer hover:text-primary">{m.footer_link_accessibility()}</li>
 						<li>
+							<a href={localizeHref('/crawl-path')} class="cursor-pointer hover:text-primary">Crawl Path</a>
+						</li>
+						<li>
 							<a href="/sitemap.xml" class="cursor-pointer hover:text-primary" target="_blank">{m.footer_link_sitemap()}</a>
 						</li>
 					</ul>

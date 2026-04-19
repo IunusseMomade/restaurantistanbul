@@ -7,13 +7,13 @@
 	import { page } from '$app/state';
 
 	let { children } = $props();
-	export const prerender = true;
 
 	let forceSolid = $derived(!['/', '/menu', '/about'].includes(page.route.id || ''));
 </script>
 
 <svelte:head>
 	<link rel="icon" type="image/png" href={favicon} />
+	<link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 </svelte:head>
 
 <!-- <div class="overflow-x-hidden min-h-screen"> -->

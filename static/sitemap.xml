@@ -158,4 +158,35 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+
+  <url>
+    <loc>https://restaurantistanbul.pages.dev/crawl-path</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://restaurantistanbul.pages.dev/crawl-path" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://restaurantistanbul.pages.dev/en/crawl-path" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://restaurantistanbul.pages.dev/tr/crawl-path" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://restaurantistanbul.pages.dev/crawl-path" />
+    <lastmod>2026-04-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://restaurantistanbul.pages.dev/en/crawl-path</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://restaurantistanbul.pages.dev/crawl-path" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://restaurantistanbul.pages.dev/en/crawl-path" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://restaurantistanbul.pages.dev/tr/crawl-path" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://restaurantistanbul.pages.dev/crawl-path" />
+    <lastmod>2026-04-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://restaurantistanbul.pages.dev/tr/crawl-path</loc>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://restaurantistanbul.pages.dev/crawl-path" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://restaurantistanbul.pages.dev/en/crawl-path" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://restaurantistanbul.pages.dev/tr/crawl-path" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://restaurantistanbul.pages.dev/crawl-path" />
+    <lastmod>2026-04-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>

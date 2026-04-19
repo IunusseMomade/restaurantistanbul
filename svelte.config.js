@@ -9,14 +9,17 @@ const localizedEntries = [
 	'/contato',
 	'/localizacoes',
 	'/menu',
+	'/crawl-path',
 	'/en/about',
 	'/en/contact',
 	'/en/locations',
 	'/en/menu',
+	'/en/crawl-path',
 	'/tr/hakkimizda',
 	'/tr/iletisim',
 	'/tr/konumlar',
-	'/tr/menu'
+	'/tr/menu',
+	'/tr/crawl-path'
 ];
 
 /** @type {import('@sveltejs/kit').Config} */
