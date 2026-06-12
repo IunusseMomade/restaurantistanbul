@@ -1,6 +1,5 @@
 <script lang="ts">
 	import './layout.css';
-	import favicon from '$lib/assets/favicon.png';
 	import LanguageSwitcher from '$lib/components/LanguageSwitcher.svelte';
 	import Navbar from '$lib/components/Navbar.svelte';
 	import Footer from '$lib/components/Footer.svelte';
@@ -13,7 +12,10 @@
 </script>
 
 <svelte:head>
-	<link rel="icon" type="image/png" href={favicon} />
+	<link rel="icon" href="/favicon.ico" sizes="any" />
+	<link rel="icon" href="/favicon.png" type="image/png" />
+	<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+	<link rel="shortcut icon" href="/favicon.png" />
 </svelte:head>
 
 <!-- <div class="overflow-x-hidden min-h-screen"> -->
