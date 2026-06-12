@@ -210,6 +210,55 @@
 
 	import dish_hasirli_kebap_resmi from '$lib/assets/images/menu/original-menu/compressed/hasırlı kebap resmi.jpg?enhanced';
 
+	// new extracted images
+
+	import dish_akdeniz_salatasi from '$lib/assets/images/menu/extracted-images/Akdeniz Salatası.png?enhanced';
+	import dish_avci_boregi from '$lib/assets/images/menu/extracted-images/Avcı Böreği 2.png?enhanced';
+	import dish_cacik from '$lib/assets/images/menu/extracted-images/Cacık.png?enhanced';
+	import dish_cevizli_salata from '$lib/assets/images/menu/extracted-images/Cevizli Salata.png?enhanced';
+	import dish_chamussas from '$lib/assets/images/menu/extracted-images/Chamussas.png?enhanced';
+	import dish_classic_hamburger from '$lib/assets/images/menu/extracted-images/Classic Hamburger.png?enhanced';
+	import dish_cuban_onion_molho_cockte from '$lib/assets/images/menu/extracted-images/Cuban Onion Molho Cockte.png?enhanced';
+	import dish_dose_de_arroz_mix from '$lib/assets/images/menu/extracted-images/Dose de Arroz Mix.png?enhanced';
+	import dish_dose_de_batata from '$lib/assets/images/menu/extracted-images/Dose de Batata.png?enhanced';
+	import dish_durum_doner from '$lib/assets/images/menu/extracted-images/Dürüm Döner.png?enhanced';
+	import dish_especial_istambul from '$lib/assets/images/menu/extracted-images/Especial Istambul.png?enhanced';
+	import dish_frango_inteiro_grelhado from '$lib/assets/images/menu/extracted-images/Frango Inteiro Grelhado.png?enhanced';
+	import dish_humus from '$lib/assets/images/menu/extracted-images/Humus.png?enhanced';
+	import dish_kavurmali_yumurta from '$lib/assets/images/menu/extracted-images/Kavurmalı Yumurta.png?enhanced';
+	import dish_menemen from '$lib/assets/images/menu/extracted-images/Menemen.png?enhanced';
+	import dish_mini_pequeno_almoco from '$lib/assets/images/menu/extracted-images/Mini Pequeno Almoço.png?enhanced';
+	import dish_omlete_simples from '$lib/assets/images/menu/extracted-images/Omlete Simples.png?enhanced';
+	import dish_pequeno_almoco_completo from '$lib/assets/images/menu/extracted-images/Pequeno Almoço Completo.png?enhanced';
+	import dish_porsiyon_doner from '$lib/assets/images/menu/extracted-images/Porsiyon Döner.png?enhanced';
+	import dish_prego_no_pao from '$lib/assets/images/menu/extracted-images/Prego no pao.png?enhanced';
+	import dish_rissois from '$lib/assets/images/menu/extracted-images/Rissóis.png?enhanced';
+	import dish_sopa_de_cabeca from '$lib/assets/images/menu/extracted-images/Sopa de Cabeça.png?enhanced';
+	import dish_sopa_de_dobrada from '$lib/assets/images/menu/extracted-images/Sopa de Dobrada.png?enhanced';
+	import dish_sopa_de_lentilha from '$lib/assets/images/menu/extracted-images/Sopa de Lentilha.png?enhanced';
+	import dish_sopa_de_mariscos from '$lib/assets/images/menu/extracted-images/Sopa de Mariscos.png?enhanced';
+	import dish_sopa_de_peixe from '$lib/assets/images/menu/extracted-images/Sopa de Peixe.png?enhanced';
+	import dish_sopa_de_vegetais from '$lib/assets/images/menu/extracted-images/Sopa de Vegetais.png?enhanced';
+	import dish_tavuk_doner from '$lib/assets/images/menu/extracted-images/Tavuk Döner.png?enhanced';
+	import dish_tavuk_durum from '$lib/assets/images/menu/extracted-images/Tavuk Dürüm.png?enhanced';
+	import dish_tavuk_salatasi from '$lib/assets/images/menu/extracted-images/Tavuk Salatası.png?enhanced';
+	import dish_tombik_doner from '$lib/assets/images/menu/extracted-images/Tombik Döner.png?enhanced';
+	import dish_tombik_sandvic from '$lib/assets/images/menu/extracted-images/Tombik Sandviç.png?enhanced';
+	import dish_ton_balikli_salata from '$lib/assets/images/menu/extracted-images/Ton Balıklı Salata.png?enhanced';
+	import dish_torrada from '$lib/assets/images/menu/extracted-images/Torrada.png?enhanced';
+	import dish_tosta_de_atum from '$lib/assets/images/menu/extracted-images/Tosta De Atum.png?enhanced';
+	import dish_tosta_de_fiambre from '$lib/assets/images/menu/extracted-images/Tosta De Fiambre.png?enhanced';
+	import dish_tosta_de_franga from '$lib/assets/images/menu/extracted-images/Tosta De Franga.png?enhanced';
+	import dish_tosta_de_queijo from '$lib/assets/images/menu/extracted-images/Tosta De Queijo.png?enhanced';
+	import dish_tosta_mista from '$lib/assets/images/menu/extracted-images/Tosta Mista.png?enhanced';
+	import dish_yogurt from '$lib/assets/images/menu/extracted-images/Yoğurt.png?enhanced';
+	import dish_zinguer from '$lib/assets/images/menu/extracted-images/Zinguer.png?enhanced';
+	import dish_coban_salatasi from '$lib/assets/images/menu/extracted-images/Çoban Salatası.png?enhanced';
+	import dish_iskender_kebap from '$lib/assets/images/menu/extracted-images/İskender Kebap.png?enhanced';
+	import dish_icli_kofte from '$lib/assets/images/menu/extracted-images/İçli Köfte.png?enhanced';
+
+
+
 
 	//header
 	import menu_header from '$lib/assets/images/menu-header-2.jpeg?enhanced';
@@ -225,73 +274,73 @@
 	// I've mapped a few items per category to demonstrate.
 	let menuItems = $derived({
 		starters: [
-			{ name: m.item_icli_kofte(), desc: m.desc_icli_kofte(), price: "400" },
-			{ name: m.item_hummus(), desc: m.desc_hummus(), price: "400", dietary: "V" },
-			{ name: m.item_avci_boregi(), desc: m.desc_avci_boregi(), price: "500" },
-			{ name: m.item_rice_mix(), desc: m.desc_rice_mix(), price: "250" },
-			{ name: m.item_potato_portion(), desc: m.desc_potato_portion(), price: "250" },
-			{ name: m.item_shrimp_tartlets(), desc: m.desc_shrimp_tartlets(), price: "160" },
+			{ name: m.item_icli_kofte(), desc: m.desc_icli_kofte(), price: "400", image: dish_icli_kofte, images: [dish_icli_kofte] },
+			{ name: m.item_hummus(), desc: m.desc_hummus(), price: "400", dietary: "V", image: dish_humus, images: [dish_humus] },
+			{ name: m.item_avci_boregi(), desc: m.desc_avci_boregi(), price: "500", image: dish_avci_boregi, images: [dish_avci_boregi] },
+			{ name: m.item_rice_mix(), desc: m.desc_rice_mix(), price: "250", image: dish_dose_de_arroz_mix, images: [dish_dose_de_arroz_mix] },
+			{ name: m.item_potato_portion(), desc: m.desc_potato_portion(), price: "250", image: dish_dose_de_batata, images: [dish_dose_de_batata] },
+			{ name: m.item_shrimp_tartlets(), desc: m.desc_shrimp_tartlets(), price: "160", image: dish_rissois, images: [dish_rissois] },
 			{ name: m.item_garlic_bread(), desc: m.desc_garlic_bread(), price: "350" },
 			{ name: m.item_bread_feta(), desc: m.desc_bread_feta(), price: "400" },
-			{ name: m.item_samosas(), desc: m.desc_samosas(), price: "160" }
+			{ name: m.item_samosas(), desc: m.desc_samosas(), price: "160", image: dish_chamussas, images: [dish_chamussas] }
 		],
 		breakfast: [
-			{ name: m.item_complete_breakfast(), desc: m.desc_complete_breakfast(), price: "2200" },
-			{ name: m.item_menemen(), desc: m.desc_menemen(), price: "550" },
-			{ name: m.item_kavurmali_yumurta(), desc: m.desc_kavurmali_yumurta(), price: "550" },
-			{ name: m.item_plain_omelette(), desc: m.desc_plain_omelette(), price: "600" },
-			{ name: m.item_mini_breakfast(), desc: m.desc_mini_breakfast(), price: "900" },
+			{ name: m.item_complete_breakfast(), desc: m.desc_complete_breakfast(), price: "2200", image: dish_pequeno_almoco_completo, images: [dish_pequeno_almoco_completo] },
+			{ name: m.item_menemen(), desc: m.desc_menemen(), price: "550", image: dish_menemen, images: [dish_menemen] },
+			{ name: m.item_kavurmali_yumurta(), desc: m.desc_kavurmali_yumurta(), price: "550", image: dish_kavurmali_yumurta, images: [dish_kavurmali_yumurta] },
+			{ name: m.item_plain_omelette(), desc: m.desc_plain_omelette(), price: "600", image: dish_omlete_simples, images: [dish_omlete_simples] },
+			{ name: m.item_mini_breakfast(), desc: m.desc_mini_breakfast(), price: "900", image: dish_mini_pequeno_almoco, images: [dish_mini_pequeno_almoco] },
 			{ name: m.item_crepe_plate(), desc: m.desc_crepe_plate(), price: "600" },
 			{ name: m.item_stuffed_croissant(), desc: m.desc_stuffed_croissant(), price: "220" }
 		],
 		soups: [
-			{ name: m.item_lentil_soup(), desc: m.desc_lentil_soup(), price: "350", dietary: "V" },
+			{ name: m.item_lentil_soup(), desc: m.desc_lentil_soup(), price: "350", dietary: "V", image: dish_sopa_de_lentilha, images: [dish_sopa_de_lentilha] },
 			{ name: m.item_lamb_soup(), desc: m.desc_lamb_soup(), price: "1000" },
-			{ name: m.item_vegetable_soup(), desc: m.desc_vegetable_soup(), price: "450" },
-			{ name: m.item_fish_soup(), desc: m.desc_fish_soup(), price: "550" },
-			{ name: m.item_tripe_soup(), desc: m.desc_tripe_soup(), price: "550" },
-			{ name: m.item_head_soup(), desc: m.desc_head_soup(), price: "600" },
-			{ name: m.item_bisque_soup(), desc: m.desc_bisque_soup(), price: "600" }
+			{ name: m.item_vegetable_soup(), desc: m.desc_vegetable_soup(), price: "450", image: dish_sopa_de_vegetais, images: [dish_sopa_de_vegetais] },
+			{ name: m.item_fish_soup(), desc: m.desc_fish_soup(), price: "550", image: dish_sopa_de_peixe, images: [dish_sopa_de_peixe] },
+			{ name: m.item_tripe_soup(), desc: m.desc_tripe_soup(), price: "550", image: dish_sopa_de_dobrada, images: [dish_sopa_de_dobrada] },
+			{ name: m.item_head_soup(), desc: m.desc_head_soup(), price: "600", image: dish_sopa_de_cabeca, images: [dish_sopa_de_cabeca] },
+			{ name: m.item_bisque_soup(), desc: m.desc_bisque_soup(), price: "600", image: dish_sopa_de_mariscos, images: [dish_sopa_de_mariscos] }
 		],
 		salads: [
-			{ name: m.item_tuna_salad(), desc: m.desc_tuna_salad(), price: "700" },
+			{ name: m.item_tuna_salad(), desc: m.desc_tuna_salad(), price: "700", image: dish_ton_balikli_salata, images: [dish_ton_balikli_salata] },
 			{ name: m.item_salmon_salad(), desc: m.desc_salmon_salad(), price: "900" },
-			{ name: m.item_mediterranean_salad(), desc: m.desc_mediterranean_salad(), price: "650" },
-			{ name: m.item_shepherd_salad(), desc: m.desc_shepherd_salad(), price: "400" },
-			{ name: m.item_chicken_salad(), desc: m.desc_chicken_salad(), price: "700" },
-			{ name: m.item_walnut_salad(), desc: m.desc_walnut_salad(), price: "650" },
-			{ name: m.item_cacik(), desc: m.desc_cacik(), price: "400" },
-			{ name: m.item_yogurt_1kg(), desc: m.desc_yogurt_1kg(), price: "300" },
-			{ name: m.item_yogurt_6kg(), desc: m.desc_yogurt_6kg(), price: "1600" }
+			{ name: m.item_mediterranean_salad(), desc: m.desc_mediterranean_salad(), price: "650", image: dish_akdeniz_salatasi, images: [dish_akdeniz_salatasi] },
+			{ name: m.item_shepherd_salad(), desc: m.desc_shepherd_salad(), price: "400", image: dish_coban_salatasi, images: [dish_coban_salatasi] },
+			{ name: m.item_chicken_salad(), desc: m.desc_chicken_salad(), price: "700", image: dish_tavuk_salatasi, images: [dish_tavuk_salatasi] },
+			{ name: m.item_walnut_salad(), desc: m.desc_walnut_salad(), price: "650", image: dish_cevizli_salata, images: [dish_cevizli_salata] },
+			{ name: m.item_cacik(), desc: m.desc_cacik(), price: "400", image: dish_cacik, images: [dish_cacik] },
+			{ name: m.item_yogurt_1kg(), desc: m.desc_yogurt_1kg(), price: "300", image: dish_yogurt, images: [dish_yogurt] },
+			{ name: m.item_yogurt_6kg(), desc: m.desc_yogurt_6kg(), price: "1600", image: dish_yogurt, images: [dish_yogurt] }
 		],
 		toast: [
-			{ name: m.item_prego_bread(), desc: m.desc_prego_bread(), price: "650" },
-			{ name: m.item_toast(), desc: m.desc_toast(), price: "200" },
-			{ name: m.item_tombik_sandwich(), desc: m.desc_tombik_sandwich(), price: "550" },
-			{ name: m.item_cheese_toast(), desc: m.desc_cheese_toast(), price: "400" },
-			{ name: m.item_ham_toast(), desc: m.desc_ham_toast(), price: "500" },
-			{ name: m.item_mix_toast(), desc: m.desc_mix_toast(), price: "650" },
-			{ name: m.item_chicken_toast(), desc: m.desc_chicken_toast(), price: "600" },
-			{ name: m.item_tuna_toast(), desc: m.desc_tuna_toast(), price: "600" }
+			{ name: m.item_prego_bread(), desc: m.desc_prego_bread(), price: "650", image: dish_prego_no_pao, images: [dish_prego_no_pao] },
+			{ name: m.item_toast(), desc: m.desc_toast(), price: "200", image: dish_torrada, images: [dish_torrada] },
+			{ name: m.item_tombik_sandwich(), desc: m.desc_tombik_sandwich(), price: "550", image: dish_tombik_sandvic, images: [dish_tombik_sandvic] },
+			{ name: m.item_cheese_toast(), desc: m.desc_cheese_toast(), price: "400", image: dish_tosta_de_queijo, images: [dish_tosta_de_queijo] },
+			{ name: m.item_ham_toast(), desc: m.desc_ham_toast(), price: "500", image: dish_tosta_de_fiambre, images: [dish_tosta_de_fiambre] },
+			{ name: m.item_mix_toast(), desc: m.desc_mix_toast(), price: "650", image: dish_tosta_mista, images: [dish_tosta_mista] },
+			{ name: m.item_chicken_toast(), desc: m.desc_chicken_toast(), price: "600", image: dish_tosta_de_franga, images: [dish_tosta_de_franga] },
+			{ name: m.item_tuna_toast(), desc: m.desc_tuna_toast(), price: "600", image: dish_tosta_de_atum, images: [dish_tosta_de_atum] }
 		],
 		burgers: [
-			{ name: m.item_classic_burger(), desc: m.desc_classic_burger(), price: "650" },
-			{ name: m.item_istanbul_special(), desc: m.desc_istanbul_special(), price: "800" },
-			{ name: m.item_zinger(), desc: m.desc_zinger(), price: "800" },
-			{ name: m.item_cuban_onion(), desc: m.desc_cuban_onion(), price: "800" },
+			{ name: m.item_classic_burger(), desc: m.desc_classic_burger(), price: "650", image: dish_classic_hamburger, images: [dish_classic_hamburger] },
+			{ name: m.item_istanbul_special(), desc: m.desc_istanbul_special(), price: "800", image: dish_especial_istambul, images: [dish_especial_istambul] },
+			{ name: m.item_zinger(), desc: m.desc_zinger(), price: "800", image: dish_zinguer, images: [dish_zinguer] },
+			{ name: m.item_cuban_onion(), desc: m.desc_cuban_onion(), price: "800", image: dish_cuban_onion_molho_cockte, images: [dish_cuban_onion_molho_cockte] },
 			{ name: m.item_uzivizi_burger(), desc: m.desc_uzivizi_burger(), price: "550" }
 		],
 		doner: [
-			{ name: m.item_iskender_kebab(), desc: m.desc_iskender_kebab(), price: "1150" },
-			{ name: m.item_durum_doner(), desc: m.desc_durum_doner(), price: "550" },
-			{ name: m.item_tombik_doner(), desc: m.desc_tombik_doner(), price: "650" },
-			{ name: m.item_porsiyon_doner(), desc: m.desc_porsiyon_doner(), price: "1000" }
+			{ name: m.item_iskender_kebab(), desc: m.desc_iskender_kebab(), price: "1150", image: dish_iskender_kebap, images: [dish_iskender_kebap] },
+			{ name: m.item_durum_doner(), desc: m.desc_durum_doner(), price: "550", image: dish_durum_doner, images: [dish_durum_doner] },
+			{ name: m.item_tombik_doner(), desc: m.desc_tombik_doner(), price: "650", image: dish_tombik_doner, images: [dish_tombik_doner] },
+			{ name: m.item_porsiyon_doner(), desc: m.desc_porsiyon_doner(), price: "1000", image: dish_porsiyon_doner, images: [dish_porsiyon_doner] }
 		],
 		chicken: [
-			{ name: m.item_half_chicken(), desc: m.desc_half_chicken(), price: "500" },
-			{ name: m.item_whole_chicken(), desc: m.desc_whole_chicken(), price: "900" },
-			{ name: m.item_chicken_doner_plate(), desc: m.desc_chicken_doner_plate(), price: "850" },
-			{ name: m.item_chicken_shawarma(), desc: m.desc_chicken_shawarma(), price: "550" },
+			{ name: m.item_half_chicken(), desc: m.desc_half_chicken(), price: "500", image: dish_frango_inteiro_grelhado, images: [dish_frango_inteiro_grelhado] },
+			{ name: m.item_whole_chicken(), desc: m.desc_whole_chicken(), price: "900", image: dish_frango_inteiro_grelhado, images: [dish_frango_inteiro_grelhado] },
+			{ name: m.item_chicken_doner_plate(), desc: m.desc_chicken_doner_plate(), price: "850", image: dish_tavuk_doner, images: [dish_tavuk_doner] },
+			{ name: m.item_chicken_shawarma(), desc: m.desc_chicken_shawarma(), price: "550", image: dish_tavuk_durum, images: [dish_tavuk_durum] },
 			{ name: m.item_chicken_breast(), desc: m.desc_chicken_breast(), price: "700" },
 			{ name: m.item_schnitzel(), desc: m.desc_schnitzel(), price: "800", image: schnitzel, images: [schnitzel] }
 		],
